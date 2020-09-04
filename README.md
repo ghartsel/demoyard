@@ -1,2 +1,2 @@
 # demoyard
-Published demo documentation.
+Location for serving demo content.
