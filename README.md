@@ -1,7 +1,7 @@
 # demoyard
 Location for serving demo content.
 
-Currently, this repository holds the published ReStructuredText Cheat Sheet document.  It can be viewed at this [GitHub Pages location](https://ghartsel.github.io/demoyard/index.html).
+This repository holds a placeholder document that is used solely to demonstrate the Dore static site generator.  View the Dore output of this content at this [GitHub Pages location](https://ghartsel.github.io/demoyard/index.html).
 
 The source is located in the [DoreStaticSiteGenerator repository](https://github.com/ghartsel/DoreStaticSiteGenerator/tree/master/ReSTCheatSheet).
 
