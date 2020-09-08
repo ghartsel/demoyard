@@ -179,16 +179,175 @@
 <div class="wy-nav-content">
 <div class="rst-content">
 <a href="index.html">Home</a>
-
+<a href="tutRequest.html" class="stealth-btn float-right" title="Accesskey Alt(+Shift)+n">Next</a><span class="bar  float-right">|</span><a href="tutFirst.html" class="stealth-btn float-right" title="Accesskey Alt(+Shift)+p">Previous</a>
 <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
 <div itemprop="articleBody" class="toBeIndexed">
+<div class="document">
+<div class="section" id="create-a-custom-application">
+<h1>Create a Custom Application</h1>
+<p>This example shows the steps involved in
+creating a custom application that sends a data stream to the Demoyard
+Cloud using the Demoyard Agent gRPC API. For the simple applications, you do not need a configuration file because your stream name is dynamically added to the Demoyard Cloud.</p>
+<p>See the example source code: <a class="reference internal" href="#example-source">Example Source</a></p>
+<div class="section" id="step-1-create-your-custom-application">
+<h2>Step 1. Create Your Custom Application</h2>
+<p>Import the following Python modules:</p>
+<pre class="code python literal-block">
+<span class="keyword namespace">import</span> <span class="name namespace">base64</span>
+<span class="keyword namespace">import</span> <span class="name namespace">json</span>
+<span class="keyword namespace">import</span> <span class="name namespace">sys</span>
+<span class="keyword namespace">import</span> <span class="name namespace">time</span>
+<span class="keyword namespace">import</span> <span class="name namespace">grpc</span>
+<span class="keyword namespace">import</span> <span class="name namespace">agent</span>
+<span class="keyword namespace">import</span> <span class="name namespace">agent_grpc</span>
+</pre>
+<p>The <tt class="docutils literal">grpc</tt> module is the RPC API framework implemented by the
+Demoyard Agent. The <tt class="docutils literal">agent</tt> and <tt class="docutils literal">agent_grpc</tt> modules should be in
+your example directory, originally copied from the Demoyard repository.</p>
+<p>The example first connects to the Demoyard Agent, which listens for gRPC messages on port 7501.</p>
+<pre class="code python literal-block">
+<span class="name">pipe</span> <span class="operator">=</span> <span class="name">grpc</span><span class="operator">.</span><span class="name">insecure_pipe</span><span class="punctuation">(</span><span class="literal string double">&quot;localhost:7501&quot;</span><span class="punctuation">)</span>
+<span class="name">agent</span> <span class="operator">=</span> <span class="name">agent_grpc</span><span class="operator">.</span><span class="name">Agent</span><span class="punctuation">(</span><span class="name">pipe</span><span class="punctuation">)</span>
+</pre>
+<p>After you successfully connect, send data to the Demoyard Agent by calling the gRPC API
+<tt class="docutils literal">SendData()</tt> function defined in the agent_grpc.py file.</p>
+<pre class="code python literal-block">
+<span class="name">agent_stub</span><span class="operator">.</span><span class="name">SendData</span><span class="punctuation">(</span><span class="name">write_data</span> <span class="name">points</span><span class="punctuation">())</span>
+</pre>
+<p>The following functions show the steps to create and write a data point.</p>
+<div class="section" id="create-a-datapoint">
+<h3>Create a Datapoint</h3>
+<p>All data points have the following definition:</p>
+<pre class="code json literal-block">
+<span class="punctuation">{</span>
+   <span class="name tag">&quot;stream&quot;</span><span class="punctuation">:</span> <span class="literal string double">&quot;&lt;streamName&gt;&quot;</span><span class="punctuation">,</span>
+   <span class="name tag">&quot;timestamp&quot;</span><span class="punctuation">:</span> <span class="error">&lt;time&gt;</span><span class="punctuation">,</span>
+   <span class="name tag">&quot;&lt;data_type&gt;&quot;</span><span class="punctuation">:</span> <span class="punctuation">{</span> <span class="error">&lt;dataObject&gt;</span> <span class="punctuation">}</span>
+<span class="punctuation">}</span>
+</pre>
+<p>The <tt class="docutils literal">create_data_point()</tt> function populates this structure with:</p>
+<ul class="simple">
+<li>A stream name.  If the stream is not defined in the config.toml file, the Demoyard Cloud dynamically creates the stream.</li>
+<li>A timestamp, in epoch time.</li>
+<li>The data, specified as a type-value pair having a <cite>Text</cite> data type and a string value.</li>
+</ul>
+<p>create then calls <cite>agent.Datapoint()</cite> to create the data point.</p>
+<pre class="code python literal-block">
+<span class="keyword">def</span> <span class="name function">create_data_point</span><span class="punctuation">(</span><span class="name">point</span><span class="punctuation">):</span>
+    <span class="name">timestamp</span> <span class="operator">=</span> <span class="name builtin">int</span><span class="punctuation">(</span><span class="name">time</span><span class="operator">.</span><span class="name">time</span><span class="punctuation">()</span> <span class="operator">*</span> <span class="literal number integer">1000</span><span class="punctuation">)</span>
+    <span class="name">text_msg</span> <span class="operator">=</span> <span class="name">agent</span><span class="operator">.</span><span class="name">Text</span><span class="punctuation">()</span>
+    <span class="name">text_msg</span><span class="operator">.</span><span class="name">value</span> <span class="operator">=</span> <span class="literal string single">'this is a </span><span class="literal string interpol">%s</span><span class="literal string single"> data point'</span> <span class="operator">%</span> <span class="name">point</span>
+    <span class="name">data_point</span> <span class="operator">=</span> <span class="name">agent</span><span class="operator">.</span><span class="name">Datapoint</span><span class="punctuation">(</span>
+        <span class="name">stream</span><span class="operator">=</span><span class="literal string double">&quot;testStream_01&quot;</span><span class="punctuation">,</span> <span class="name">text</span><span class="operator">=</span><span class="name">text_msg</span><span class="punctuation">,</span> <span class="name">timestamp</span><span class="operator">=</span><span class="name">timestamp</span><span class="punctuation">)</span>
+    <span class="keyword">return</span> <span class="name">data_point</span>
+</pre>
+</div>
+<div class="section" id="write-the-datapoints">
+<h3>Write the Datapoints</h3>
+<p>The <tt class="docutils literal">write_data points()</tt> function continuously creates data points until you end the program with <tt class="docutils literal"><span class="pre">Ctrl-c</span></tt>. The function pauses 10 seconds between data point transmission.</p>
+<pre class="code python literal-block">
+<span class="keyword">def</span> <span class="name function">write_data</span> <span class="name">points</span><span class="punctuation">():</span>
+    <span class="keyword">while</span> <span class="name">agent_stub</span> <span class="operator word">is</span> <span class="operator word">not</span> <span class="name builtin pseudo">None</span><span class="punctuation">:</span>
+        <span class="keyword">yield</span> <span class="name">create_data_point</span><span class="punctuation">(</span><span class="literal string double">&quot;stream&quot;</span><span class="punctuation">)</span>
+        <span class="name">time</span><span class="operator">.</span><span class="name">sleep</span><span class="punctuation">(</span><span class="literal number integer">10</span><span class="punctuation">)</span>
+</pre>
+<p>In the next step, you can run this example and see the results on the Demoyard web application.</p>
+</div>
+</div>
+<div class="section" id="step-2-run-the-example-and-visualize-your-data">
+<h2>Step 2. Run the Example and Visualize Your Data</h2>
+<p>Run the example using the following command:</p>
+<pre class="code bash literal-block">
+$ python custom.py
+</pre>
+<p>The example displays:</p>
+<pre class="code literal-block">
+Demoyard Agent communication established.
+Streaming data points (use Ctrl+c to exit) ...
+</pre>
+<p>Next, log in to the Demoyard Cloud using your Demoyard credentials. Scroll to the panel labeled <strong>testStream_01</strong>.</p>
+<p>In the example, four data points were received by the Demoyard Cloud and you can view the data:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="87%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Column</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><strong>VALUE</strong></td>
+<td>Shows the data string sent by the example: <tt class="docutils literal">This is a data point</tt>.</td>
+</tr>
+<tr><td><strong>TIME</strong></td>
+<td>Shows the data timestamp, at approximately 10-second intervals.</td>
+</tr>
+<tr><td><strong>TAGS</strong></td>
+<td>This column is empty because a tag is not associated with this stream.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="summary">
+<h2>Summary</h2>
+<p>This tutorial introduced you to the steps needed to create a simple,
+custom application that sends a data stream to the Demoyard Cloud.</p>
+<p>Try associating a tag with the data by defining the tag and stream and the <cite>/home/demoyard/config.toml</cite> file:</p>
+<pre class="code literal-block">
+[demoyard]
+agent-ip = &quot;localhost&quot;
+agent-port-grpc = &quot;7501&quot;
+agent-port-http = &quot;7502&quot;
+[tags]
+site = &quot;test_lab&quot;
+[[streams]]
+name = &quot;testStream_01&quot;
+</pre>
+<p>Run the example again and view the results in the Demoyard web application.  Make sure to restart the Demoyard Agent before running the example.</p>
+</div>
+<div class="section" id="example-source">
+<h2>Example Source</h2>
+<pre class="code python literal-block">
+<span class="comment hashbang">#!/usr/bin/env python</span>
+<span class="keyword namespace">import</span> <span class="name namespace">base64</span>
+<span class="keyword namespace">import</span> <span class="name namespace">json</span>
+<span class="keyword namespace">import</span> <span class="name namespace">sys</span>
+<span class="keyword namespace">import</span> <span class="name namespace">time</span>
+<span class="keyword namespace">import</span> <span class="name namespace">grpc</span>
+<span class="keyword namespace">import</span> <span class="name namespace">agent</span>
+<span class="keyword namespace">import</span> <span class="name namespace">agent_grpc</span>
+<span class="comment single">#### gRPC Implementation ####</span>
+<span class="keyword">def</span> <span class="name function">create_data_point</span><span class="punctuation">(</span><span class="name">point</span><span class="punctuation">):</span>
+    <span class="name">timestamp</span> <span class="operator">=</span> <span class="name builtin">int</span><span class="punctuation">(</span><span class="name">time</span><span class="operator">.</span><span class="name">time</span><span class="punctuation">()</span> <span class="operator">*</span> <span class="literal number integer">1000</span><span class="punctuation">)</span>
+    <span class="name">text_msg</span> <span class="operator">=</span> <span class="name">agent</span><span class="operator">.</span><span class="name">Text</span><span class="punctuation">()</span>
+    <span class="name">text_msg</span><span class="operator">.</span><span class="name">value</span> <span class="operator">=</span> <span class="literal string single">'this is a </span><span class="literal string interpol">%s</span><span class="literal string single"> data point'</span> <span class="operator">%</span> <span class="name">point</span>
+    <span class="name">data_point</span> <span class="operator">=</span> <span class="name">agent</span><span class="operator">.</span><span class="name">Datapoint</span><span class="punctuation">(</span>
+        <span class="name">stream</span><span class="operator">=</span><span class="literal string double">&quot;testStream_01&quot;</span><span class="punctuation">,</span> <span class="name">text</span><span class="operator">=</span><span class="name">text_msg</span><span class="punctuation">,</span> <span class="name">timestamp</span><span class="operator">=</span><span class="name">timestamp</span><span class="punctuation">)</span>
+    <span class="keyword">return</span> <span class="name">data_point</span>
+<span class="keyword">def</span> <span class="name function">write_data</span> <span class="name">points</span><span class="punctuation">():</span>
+    <span class="keyword">while</span> <span class="name">agent_stub</span> <span class="operator word">is</span> <span class="operator word">not</span> <span class="name builtin pseudo">None</span><span class="punctuation">:</span>
+        <span class="keyword">yield</span> <span class="name">create_data_point</span><span class="punctuation">(</span><span class="literal string double">&quot;stream&quot;</span><span class="punctuation">)</span>
+        <span class="name">time</span><span class="operator">.</span><span class="name">sleep</span><span class="punctuation">(</span><span class="literal number integer">10</span><span class="punctuation">)</span>
+<span class="comment single">#### Entry point ####</span>
+<span class="name">pipe</span> <span class="operator">=</span> <span class="name">grpc</span><span class="operator">.</span><span class="name">insecure_pipe</span><span class="punctuation">(</span><span class="literal string double">&quot;localhost:7501&quot;</span><span class="punctuation">)</span>
+<span class="name">agent_stub</span> <span class="operator">=</span> <span class="name">agent_grpc</span><span class="operator">.</span><span class="name">AgentStub</span><span class="punctuation">(</span><span class="name">pipe</span><span class="punctuation">)</span>
+<span class="keyword">print</span><span class="punctuation">(</span><span class="literal string single">'</span><span class="literal string escape">\n</span><span class="literal string single">Demoyard Agent communication established.'</span><span class="punctuation">)</span>
+<span class="comment single">#### Datapoint Streaming ####</span>
+<span class="keyword">print</span><span class="punctuation">(</span><span class="literal string single">'Streaming data points (use Ctrl+c to exit) ...'</span><span class="punctuation">)</span>
+<span class="name">agent_stub</span><span class="operator">.</span><span class="name">SendData</span><span class="punctuation">(</span><span class="name">write_data</span> <span class="name">points</span><span class="punctuation">())</span>
+</pre>
+</div>
+</div>
+</div>
 
 </div><!-- /.toBeIndexed -->
 </div>
 <footer>
 <div class="rst-footer-nav" role="navigation" aria-label="footer navigation">
 
-
+<a href="tutFirst.html" title="Accesskey Alt(+Shift)+p" accesskey="p">Previous</a><span class="bar">|</span><a href="tutRequest.html" title="Accesskey Alt(+Shift)+n" accesskey="n">Next</a>
 </div></footer>
 </div>
 </div>
@@ -226,3 +385,4 @@ SphinxRtdTheme.StickyNav.enable();
 </div>
 </header>
 </body>
+</html>

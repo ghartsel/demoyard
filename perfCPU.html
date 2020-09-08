@@ -179,16 +179,38 @@
 <div class="wy-nav-content">
 <div class="rst-content">
 <a href="index.html">Home</a>
-
+<a href="dashOverview.html" class="stealth-btn float-right" title="Accesskey Alt(+Shift)+n">Next</a><span class="bar  float-right">|</span><a href="perfMemory.html" class="stealth-btn float-right" title="Accesskey Alt(+Shift)+p">Previous</a>
 <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
 <div itemprop="articleBody" class="toBeIndexed">
+<div class="document">
+<div class="section" id="cpu-performance">
+<h1>CPU Performance</h1>
+<p>To estimate system performance, this section gives reference times for various kernel facilities.  All times are for an 8 MHz crystal (500 nanosecond instruction cycle time).</p>
+<div class="section" id="context-switch-timing">
+<h2>Context Switch Timing</h2>
+<p>The time needed to switch from a task that has released control of the processor to the next ready task is 28 microseconds.</p>
+<p>This includes the time needed for data integrity checks and to pulse the watchdog.</p>
+<p>This number applies if the next task to run is a high priority task.  For each lower priority level, an additional six microseconds are needed.</p>
+<p>When an interrupt occurs, the time needed to switch to the interrupt service routine, regardless of whether the kernel is in the task or supervisor state, is 13 to 44 microseconds.  The variance depends on the instruction in progress when the interrupt occurred.</p>
+<p>This timing includes the primitive call to ENTER_SSTATE (the interrupt service routine is considered entered immediately upon return from the primitive call) and is slightly less if the kernel is already in supervisor state.</p>
+</div>
+<div class="section" id="primitive-timing">
+<h2>Primitive Timing</h2>
+<p>Fifteen microseconds are needed to access any primitive, and most primitives complete in less than 50 microseconds.</p>
+<p>However, a look at the messaging and event management primitives gives an indication of actual, useful work capability for those primitives.</p>
+<p>The time between the call to SEND a message and when the RECV call is completed, for two high priority tasks, is 476 microseconds; i.e., about 2,100 messages per second.</p>
+<p>For each lower task priority level, about six microseconds more is needed to send and receive a message.  Messages do not have a priority.</p>
+<p>Similarly, the time between the call to SIGNAL an event and when the WAIT for the event is completed, for two high priority tasks, is 422 microseconds.  This equates to about 2,369 events per second.  As with messaging, about six microseconds is added for each lower task priority level.</p>
+</div>
+</div>
+</div>
 
 </div><!-- /.toBeIndexed -->
 </div>
 <footer>
 <div class="rst-footer-nav" role="navigation" aria-label="footer navigation">
 
-
+<a href="perfMemory.html" title="Accesskey Alt(+Shift)+p" accesskey="p">Previous</a><span class="bar">|</span><a href="dashOverview.html" title="Accesskey Alt(+Shift)+n" accesskey="n">Next</a>
 </div></footer>
 </div>
 </div>
@@ -226,3 +248,4 @@ SphinxRtdTheme.StickyNav.enable();
 </div>
 </header>
 </body>
+</html>

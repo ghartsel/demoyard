@@ -179,16 +179,363 @@
 <div class="wy-nav-content">
 <div class="rst-content">
 <a href="index.html">Home</a>
-
+<a href="ifSpecification.html" class="stealth-btn float-right" title="Accesskey Alt(+Shift)+n">Next</a><span class="bar  float-right">|</span><a href="tutRequest.html" class="stealth-btn float-right" title="Accesskey Alt(+Shift)+p">Previous</a>
 <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
 <div itemprop="articleBody" class="toBeIndexed">
+<div class="document">
+<div class="section" id="general-definitions">
+<h1>General Definitions</h1>
+<div class="section" id="suspensive-primitives">
+<h2>Suspensive Primitives</h2>
+<p>There are two types of primitives.  Those that may cause a task to be preempted, these are called suspending primitives, and those that return to the caller without preemption, called non- suspending primitives.  The suspending primitives are,</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="82%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">PRIMITIVE</th>
+<th class="head">SUSPENDING CONDITION</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>ENTER_CR</td>
+<td>Critical region is not available.</td>
+</tr>
+<tr><td>RECV</td>
+<td>No message is pending to task.</td>
+</tr>
+<tr><td>WAIT</td>
+<td>No event is pending to task for requested event condition.</td>
+</tr>
+</tbody>
+</table>
+<p>The above suspending primitives have complementing primitives which, when called from another task or interrupt service routine, cause the suspended task to resume.  A task resumes when the suspending condition is satisfied.  The complementing primitives in corresponding order are EXIT_CR, SEND, and SIGNAL.</p>
+<p>Suspending primitives may not be called from an interrupt service routine because an interrupt may not be suspended by the kernel.  Suspension supports real-time applications at the task level.</p>
+<p>While tasks may be prioritized, primitives do not have a priority attribute.  For example, there is no priority assigned to messages for the SEND and RECV primitives.  All prioritization is considered with respect to tasks.</p>
+</div>
+<div class="section" id="common-primitive-attributes">
+<h2>Common Primitive Attributes</h2>
+<p>This section describes the kernel interface conventions.  These conventions have been defined to give a consistent interface, which makes application software easier to implement and maintain.</p>
+</div>
+<div class="section" id="primitive-access">
+<h2>Primitive Access</h2>
+<p>The primitive interface to the kernel is invoked as an assembly or C-language subroutine call.  Macros, defined in include files IF_K_M.H and IF_K_M.INC implement the actual access to the kernel.</p>
+<p>All kernel primitives return a function status.  This is the status of the execution of the algorithm for the primitive; either SUCCESS or FAILURE or some specialized meaning.  No data associated with the primitive are ever returned as a status.  Data are passed and returned as parameters.</p>
+</div>
+<div class="section" id="literals-used-with-primitives">
+<h2>Literals Used with Primitives</h2>
+<p>Include files provide a common, portable interface to the kernel.  Include files IF_L.H, IF_L.INC, IF_K_L.H, and IF_K_L.INC contain the literals used with the kernel primitives described in this section.  These include files may be changed to adapt the kernel to the application.  Those literals that may be changed are indicated with an asterisk (*).</p>
+<p>These literals provide a method to reference kernel attributes symbolically.  This higher level of abstraction makes the interface more maintainable and portable.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="87%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">GENERAL</th>
+<th class="head">LITERAL MEANING</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>TRUE</td>
+<td>General literal for TRUE conditional.</td>
+</tr>
+<tr><td>FALSE</td>
+<td>General literal for FALSE conditional.</td>
+</tr>
+<tr><td>DO_FOREVER</td>
+<td>This is used within a task to define the start of the main task execution loop.</td>
+</tr>
+<tr><td>DO_NOTHING</td>
+<td>A statement place-holder, which generates no code.</td>
+</tr>
+<tr><td>INV_ADDR</td>
+<td>This literal is used to set pointer variables to an invalid address, which may be used for fault
+detection.</td>
+</tr>
+<tr><td>NOT_USED</td>
+<td>This is a parameter literal to indicate a parameter is not used or has no significance.</td>
+</tr>
+<tr><td>SUCCESS</td>
+<td>This value is returned by primitives to indicate no errors occurred.</td>
+</tr>
+<tr><td>FAILURE</td>
+<td>If an error occurred during primitive execution, a FAILURE status is returned.</td>
+</tr>
+<tr><td>TIMEOUT</td>
+<td>This literal is returned by primitives to indicate a timeout condition occurred while waiting
+for the requested operation.</td>
+</tr>
+<tr><td>NO_TOUT</td>
+<td>If no timeout is desired, this literal is used for the time-specification parameter.</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="task-attributes">
+<h3>Task Attributes</h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">LITERAL</th>
+<th class="head">MEANING</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>MAX_TSK(*)</td>
+<td>For task management operations, this defines the maximum number of
+task instances, including multiple-instance tasks, that may be referenced.
+The range is 0 to 63.</td>
+</tr>
+<tr><td>MAX_TNAME</td>
+<td>For task management operations, this defines the limit for task names.
+The range is 0 to 63.</td>
+</tr>
+<tr><td>INV_TNAME</td>
+<td>Invalid task name indication.</td>
+</tr>
+<tr><td>INV_TID</td>
+<td>Invalid task identifier.</td>
+</tr>
+<tr><td>STKSIZ_L
+STKSIZ_M
+STKSIZ_S</td>
+<td><dl class="first last docutils">
+<dt>(*) Stack sizes:  large</dt>
+<dd>medium
+small</dd>
+</dl>
+</td>
+</tr>
+<tr><td>MEMSIZ_L
+MEMSIZ_M
+MEMSIZ_S</td>
+<td><dl class="first last docutils">
+<dt>(*) Dynamic memory sizes:  large</dt>
+<dd>medium
+small</dd>
+</dl>
+</td>
+</tr>
+<tr><td>PRI_HIGH
+PRI_NORM
+PRI_NONE</td>
+<td><dl class="first last docutils">
+<dt>Task relative priorities:  high</dt>
+<dd>normal
+none</dd>
+</dl>
+</td>
+</tr>
+<tr><td>BANK_0
+BANK_1
+BANK_2
+BANK_3</td>
+<td><dl class="first last docutils">
+<dt>Task resident bank location:  bank 0</dt>
+<dd>bank 1
+bank 2
+bank 3</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="queue-management">
+<h3>Queue Management</h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">LITERAL</th>
+<th class="head">MEANING</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>MAX_QUE</td>
+<td>For queue management operations, this defines the maximum number of queues
+that may be referenced.  The range is 0 to 255.</td>
+</tr>
+<tr><td>INV_QNAME</td>
+<td>Invalid queue name reference.</td>
+</tr>
+<tr><td>INV_QID</td>
+<td>Invalid queue identifier.</td>
+</tr>
+<tr><td>Q_FULL</td>
+<td>Queue is full indication.</td>
+</tr>
+<tr><td>Q_EMPTY</td>
+<td>Queue is empty indication.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="semaphore-management">
+<h3>Semaphore Management</h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">LITERAL</th>
+<th class="head">MEANING</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>MAX_SEM</td>
+<td>For semaphore related operations, this defines the maximum number of
+semaphores that may be referenced.  The range is 0 to 255.</td>
+</tr>
+<tr><td>INV_SEMNAME</td>
+<td>Invalid semaphore name reference.</td>
+</tr>
+<tr><td>INV_SEMID</td>
+<td>Invalid semaphore identifier.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="event-management">
+<h3>Event Management</h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">LITERAL</th>
+<th class="head">MEANING</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>EVT_OR</td>
+<td>Conditionally wait for any event specified.</td>
+</tr>
+<tr><td>EVT_AND</td>
+<td>Conditionally wait for all events specified.</td>
+</tr>
+<tr><td>EVT_0
+EVT_1
+EVT_2
+EVT_3
+EVT_4
+EVT_5
+EVT_6
+EVT_7
+EVT_8
+EVT_9
+EVT_10
+EVT_11
+EVT_12
+EVT_13
+EVT_14
+EVT_15</td>
+<td>Specific event identifiers; event number 0 to event number 15, the
+maximum number of events.  These symbolic names may be
+replaced by names meaningful to the application.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="timer-management">
+<h3>Timer Management</h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">LITERAL</th>
+<th class="head">MEANING</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>MS_100</td>
+<td>(*) Time intervals:  100 milliseconds.</td>
+</tr>
+<tr><td>MS_500</td>
+<td>500 milliseconds.</td>
+</tr>
+<tr><td>SEC_1</td>
+<td>One second.</td>
+</tr>
+<tr><td>SEC_10</td>
+<td>Ten seconds.</td>
+</tr>
+<tr><td>MIN_1</td>
+<td>One minute.</td>
+</tr>
+<tr><td>MIN_10</td>
+<td>Ten minutes.</td>
+</tr>
+<tr><td>HR_1</td>
+<td>One hour.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The timer management literal values are for a real-time clock interrupt rate of 32.77 milliseconds.  If this rate is changed, these literals must also be changed.  Other time reference symbols may be added, within the limitation of the maximum interval that can be represented in 16 bits.</p>
+</div>
+</div>
+<div class="section" id="fault-management">
+<h3>Fault Management</h3>
+<p>When used as the error location parameter with the LOG_FATAL and LOG_WARN primitives these literals in the bit significance shown below.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="77%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">bit</th>
+<th class="head">meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>15</td>
+<td>reserved</td>
+</tr>
+<tr><td>14‑12</td>
+<td>layer identifier</td>
+</tr>
+<tr><td>11‑10</td>
+<td>subsystem identifier</td>
+</tr>
+<tr><td>9‑8</td>
+<td>level identifier</td>
+</tr>
+<tr><td>7‑4</td>
+<td>procedure identifier</td>
+</tr>
+<tr><td>3‑0</td>
+<td>fault identifier</td>
+</tr>
+</tbody>
+</table>
+<p>Here is an example of how the literals may be used with the fault management primitives.  The example shows the announcement of the third fault in layer 3, subsystem 0, level 2, and procedure 2.</p>
+<pre class="code c literal-block">
+<span class="name">LOG_FATAL</span> <span class="punctuation">(</span><span class="name">LY_3</span> <span class="operator">+</span> <span class="name">SS_0</span> <span class="operator">+</span><span class="name">LV_L</span> <span class="operator">+</span> <span class="name">P2</span> <span class="operator">+</span> <span class="literal number integer">3</span><span class="punctuation">,</span> <span class="name">NOT_USED</span><span class="punctuation">)</span>
+</pre>
+<p>The error location is logged in the Fault Analysis Area.</p>
+</div>
+</div>
+</div>
+</div>
 
 </div><!-- /.toBeIndexed -->
 </div>
 <footer>
 <div class="rst-footer-nav" role="navigation" aria-label="footer navigation">
 
-
+<a href="tutRequest.html" title="Accesskey Alt(+Shift)+p" accesskey="p">Previous</a><span class="bar">|</span><a href="ifSpecification.html" title="Accesskey Alt(+Shift)+n" accesskey="n">Next</a>
 </div></footer>
 </div>
 </div>
@@ -226,3 +573,4 @@ SphinxRtdTheme.StickyNav.enable();
 </div>
 </header>
 </body>
+</html>

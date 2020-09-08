@@ -1,0 +1,1233 @@
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en" >
+<!--<![endif]-->
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta property="og:description" content="Document Title" />
+<meta property="og:image" content="" />
+<meta property="og:site_name" content="" />
+<meta property="og:type" content="" />
+<meta property="og:title" content="Document Title" />
+<meta property="og:type" content="website" />
+<meta property="og:updated_time" content="" />
+<meta property="og:url" content="" />
+<title>Documentation</title>
+<link rel="shortcut icon" href="static/img/favicon.ico"/>
+<link rel="stylesheet" href="static/css/theme.css" type="text/css" />
+<link rel="stylesheet" href="static/css/jquery-ui.min.css" type="text/css" />
+<script src="static/js/modernizr.min.js"></script>
+</head>
+<body class="wy-body-for-nav">
+
+<div class="wy-grid-for-nav">
+<nav data-toggle="wy-nav-shift" class="wy-nav-side">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<ul class="sidebartop">
+<li class="nolink search"><div role="search">
+<form id="rtd-search-form" class="wy-form" action="searchResults.html" method="get">
+<input type="text" name="q" placeholder="Search this document" aria-label="Search this project" id="searchinput" />
+<input type="hidden" name="check_keywords" value="yes" />
+<input type="hidden" name="area" value="default" />
+</form>
+</div>
+</li></ul>
+</div>
+<div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+
+<ul class="current">
+<li class="nav-caption"><span class="caption-text">Getting Started</span></li><li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a>
+<ul><li class="toctree-l2"><a class="reference internal" href="quickstart.html#requirements">Requirements</a>
+</li><li class="toctree-l2"><a class="reference internal" href="quickstart.html#prerequisites">Prerequisites</a>
+</li><li class="toctree-l2"><a class="reference internal" href="quickstart.html#step-1-download-the-agent-kernel">Step 1. Download the Agent Kernel</a>
+</li><li class="toctree-l2"><a class="reference internal" href="quickstart.html#step-2-install-the-agent">Step 2. Install the Agent</a>
+<ul><li class="toctree-l3"><a class="reference internal" href="quickstart.html#debian-installation">Debian Installation</a>
+</li><li class="toctree-l3"><a class="reference internal" href="quickstart.html#standalone-binary-installation">Standalone Binary Installation</a>
+</li></ul></li><li class="toctree-l2"><a class="reference internal" href="quickstart.html#step-3-verify-successful-installation">Step 3. Verify Successful Installation</a>
+</li><li class="toctree-l2"><a class="reference internal" href="quickstart.html#notes-on-batch-installation">Notes on Batch Installation</a>
+</li><li class="toctree-l2"><a class="reference internal" href="quickstart.html#next-steps">Next Steps</a>
+</li></ul></li><li class="toctree-l1"><a class="reference internal" href="kernelIntegration.html">Kernel Integration</a>
+<ul><li class="toctree-l2"><a class="reference internal" href="kernelIntegration.html#configuration-file">Configuration File</a>
+</li><li class="toctree-l2"><a class="reference internal" href="kernelIntegration.html#interrupt-vector-table">Interrupt Vector Table</a>
+</li><li class="toctree-l2"><a class="reference internal" href="kernelIntegration.html#language-considerations">Language Considerations</a>
+</li></ul></li><li class="toctree-l1"><a class="reference internal" href="hwIntegration.html">Hardware Interface</a>
+<ul><li class="toctree-l2"><a class="reference internal" href="hwIntegration.html#internal-ram">Internal RAM</a>
+</li><li class="toctree-l2"><a class="reference internal" href="hwIntegration.html#internal-registers">Internal Registers</a>
+</li><li class="toctree-l2"><a class="reference internal" href="hwIntegration.html#interrupt-vectors">Interrupt Vectors</a>
+</li><li class="toctree-l2"><a class="reference internal" href="hwIntegration.html#operating-mode">Operating Mode</a>
+</li><li class="toctree-l2"><a class="reference internal" href="hwIntegration.html#banking">Banking</a>
+</li></ul></li><li class="nav-caption"><span class="caption-text">Overview</span></li><li class="toctree-l1"><a class="reference internal" href="rtSystems.html">Real-time Systems and Autonomous Agents</a>
+<ul><li class="toctree-l2"><a class="reference internal" href="rtSystems.html#kernel-features">Kernel Features</a>
+</li><li class="toctree-l2"><a class="reference internal" href="rtSystems.html#the-kernel-model">The Kernel Model</a>
+</li><li class="toctree-l2"><a class="reference internal" href="rtSystems.html#autonomous-agents">Autonomous Agents</a>
+</li></ul></li><li class="toctree-l1"><a class="reference internal" href="concepts.html">Concepts</a>
+<ul><li class="toctree-l2"><a class="reference internal" href="concepts.html#the-task-unit">The Task Unit</a>
+</li><li class="toctree-l2"><a class="reference internal" href="concepts.html#the-task-and-its-environment">The Task and Its Environment</a>
+<ul><li class="toctree-l3"><a class="reference internal" href="concepts.html#task-discipline">TASK DISCIPLINE</a>
+</li><li class="toctree-l3"><a class="reference internal" href="concepts.html#task-attributes">TASK ATTRIBUTES</a>
+</li></ul></li><li class="toctree-l2"><a class="reference internal" href="concepts.html#task-identification-and-creation">Task Identification and Creation</a>
+<ul><li class="toctree-l3"><a class="reference internal" href="concepts.html#identification">IDENTIFICATION</a>
+</li><li class="toctree-l3"><a class="reference internal" href="concepts.html#creation">CREATION</a>
+</li></ul></li><li class="toctree-l2"><a class="reference internal" href="concepts.html#kernel-states">Kernel States</a>
+<ul><li class="toctree-l3"><a class="reference internal" href="concepts.html#state-descriptions">State Descriptions</a>
+</li><li class="toctree-l3"><a class="reference internal" href="concepts.html#scheduling-policy">Scheduling Policy</a>
+</li><li class="toctree-l3"><a class="reference internal" href="concepts.html#initialization-and-startup">Initialization and Startup</a>
+</li><li class="toctree-l3"><a class="reference internal" href="concepts.html#handling-interrupts">Handling Interrupts</a>
+</li></ul></li><li class="toctree-l2"><a class="reference internal" href="concepts.html#kernel-primitives">Kernel Primitives</a>
+</li></ul></li><li class="toctree-l1"><a class="reference internal" href="sysReliability.html">System Reliability</a>
+<ul><li class="toctree-l2"><a class="reference internal" href="sysReliability.html#reliability-issues">Reliability Issues</a>
+</li><li class="toctree-l2"><a class="reference internal" href="sysReliability.html#reliability-by-design">Reliability by Design</a>
+</li><li class="toctree-l2"><a class="reference internal" href="sysReliability.html#fault-management">Fault Management</a>
+<ul><li class="toctree-l3"><a class="reference internal" href="sysReliability.html#fault-detection">FAULT DETECTION</a>
+<ul><li class="toctree-l4"><a class="reference internal" href="sysReliability.html#memory-audits">Memory Audits</a>
+</li><li class="toctree-l4"><a class="reference internal" href="sysReliability.html#guarded-primitive-access">Guarded Primitive Access</a>
+</li><li class="toctree-l4"><a class="reference internal" href="sysReliability.html#software-watchdog">Software Watchdog</a>
+</li><li class="toctree-l4"><a class="reference internal" href="sysReliability.html#primitive-declaration">Primitive Declaration</a>
+</li><li class="toctree-l4"><a class="reference internal" href="sysReliability.html#system-build-utility">System Build Utility</a>
+</li><li class="toctree-l4"><a class="reference internal" href="sysReliability.html#high-level-language-interface">High-Level Language Interface</a>
+</li></ul></li><li class="toctree-l3"><a class="reference internal" href="sysReliability.html#fault-handling-and-recovery">FAULT HANDLING AND RECOVERY</a>
+<ul><li class="toctree-l4"><a class="reference internal" href="sysReliability.html#kernel-fault-handling">Kernel Fault Handling</a>
+</li><li class="toctree-l4"><a class="reference internal" href="sysReliability.html#application-fault-handling">Application Fault Handling</a>
+</li></ul></li></ul></li></ul></li><li class="nav-caption"><span class="caption-text">Tutorials</span></li><li class="toctree-l1"><a class="reference internal" href="tutFirst.html">Your First Application</a>
+<ul><li class="toctree-l2"><a class="reference internal" href="tutFirst.html#step-1-set-up-your-demoyard-developer-environment">Step 1. Set up Your Demoyard Developer Environment</a>
+</li><li class="toctree-l2"><a class="reference internal" href="tutFirst.html#step-2-define-your-datastream">Step 2. Define Your Datastream</a>
+</li><li class="toctree-l2"><a class="reference internal" href="tutFirst.html#step-3-visualize-your-data">Step 3. Visualize Your Data</a>
+</li><li class="toctree-l2"><a class="reference internal" href="tutFirst.html#summary">Summary</a>
+</li></ul></li><li class="toctree-l1"><a class="reference internal" href="tutCustom.html">Create a Custom Application</a>
+<ul><li class="toctree-l2"><a class="reference internal" href="tutCustom.html#step-1-create-your-custom-application">Step 1. Create Your Custom Application</a>
+<ul><li class="toctree-l3"><a class="reference internal" href="tutCustom.html#create-a-datapoint">Create a Datapoint</a>
+</li><li class="toctree-l3"><a class="reference internal" href="tutCustom.html#write-the-datapoints">Write the Datapoints</a>
+</li></ul></li><li class="toctree-l2"><a class="reference internal" href="tutCustom.html#step-2-run-the-example-and-visualize-your-data">Step 2. Run the Example and Visualize Your Data</a>
+</li><li class="toctree-l2"><a class="reference internal" href="tutCustom.html#summary">Summary</a>
+</li><li class="toctree-l2"><a class="reference internal" href="tutCustom.html#example-source">Example Source</a>
+</li></ul></li><li class="toctree-l1"><a class="reference internal" href="tutRequest.html">Make an API Call to the Demoyard Cloud</a>
+<ul><li class="toctree-l2"><a class="reference internal" href="tutRequest.html#authenticate-the-agent-with-the-cloud">Authenticate the Agent with the Cloud</a>
+</li><li class="toctree-l2"><a class="reference internal" href="tutRequest.html#get-a-list-of-users-associated-with-the-agent">Get a List of Users Associated with the Agent</a>
+</li><li class="toctree-l2"><a class="reference internal" href="tutRequest.html#example">Example</a>
+</li></ul></li><li class="nav-caption"><span class="caption-text">API Reference</span></li><li class="toctree-l1"><a class="reference internal" href="conventions.html">General Definitions</a>
+<ul><li class="toctree-l2"><a class="reference internal" href="conventions.html#suspensive-primitives">Suspensive Primitives</a>
+</li><li class="toctree-l2"><a class="reference internal" href="conventions.html#common-primitive-attributes">Common Primitive Attributes</a>
+</li><li class="toctree-l2"><a class="reference internal" href="conventions.html#primitive-access">Primitive Access</a>
+</li><li class="toctree-l2"><a class="reference internal" href="conventions.html#literals-used-with-primitives">Literals Used with Primitives</a>
+<ul><li class="toctree-l3"><a class="reference internal" href="conventions.html#task-attributes">Task Attributes</a>
+</li><li class="toctree-l3"><a class="reference internal" href="conventions.html#queue-management">Queue Management</a>
+</li><li class="toctree-l3"><a class="reference internal" href="conventions.html#semaphore-management">Semaphore Management</a>
+</li><li class="toctree-l3"><a class="reference internal" href="conventions.html#event-management">Event Management</a>
+</li><li class="toctree-l3"><a class="reference internal" href="conventions.html#timer-management">Timer Management</a>
+</li><li class="toctree-l3"><a class="reference internal" href="conventions.html#fault-management">Fault Management</a>
+</li></ul></li></ul></li><li class="toctree-l1"><a class="reference internal" href="ifSpecification.html">Interface Specification</a>
+<ul><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#gettid-get-task-identifier">GETTID Get Task Identifier</a>
+</li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#getmytid-get-own-task-identifier">GETMYTID Get Own Task Identifier</a>
+</li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#get-crid-get-resource-identifier">GET_CRID Get Resource Identifier</a>
+</li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#enter-cr-get-access-to-resource">ENTER_CR Get Access to Resource</a>
+</li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#exit-cr-release-access-to-resource">EXIT_CR Release Access to Resource</a>
+</li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#enter-scr-get-exclusive-access-to-processor">ENTER_SCR Get Exclusive Access to Processor</a>
+</li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#signal-signal-event-occurrence">SIGNAL Signal Event Occurrence</a>
+</li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#wait-wait-for-event-occurrence">WAIT Wait for Event Occurrence</a>
+</li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#send-send-message-to-task">SEND Send Message to Task</a>
+</li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#recv-wait-for-message-from-task">RECV Wait for Message from Task</a>
+</li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#alert-request-wakeup-after-time-interval">ALERT Request Wakeup after Time Interval</a>
+</li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#gettik-get-current-system-timer-value">GETTIK Get Current System Timer Value</a>
+</li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#q-getid-get-queue-identifier">Q_GETID Get Queue Identifier</a>
+</li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#q-clear-initialize-queue">Q_CLEAR Initialize Queue</a>
+</li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#q-put-add-item-to-linked-list-queue">Q_PUT Add Item to Linked-list Queue</a>
+</li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#locate-mem-locate-task-dynamic-memory">LOCATE_MEM Locate Task Dynamic Memory</a>
+</li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#log-fatal-indicate-fatal-fault-occurrence">LOG_FATAL Indicate Fatal Fault Occurrence</a>
+</li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#log-warn-indicate-non-fatal-fault-occurrence">LOG_WARN Indicate Non-fatal Fault Occurrence</a>
+</li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#exit-sstate-exit-supervisory-state">EXIT_SSTATE Exit Supervisory State</a>
+</li></ul></li><li class="toctree-l1"><a class="reference internal" href="dataStructures.html">Data Structures</a>
+<ul><li class="toctree-l2"><a class="reference internal" href="dataStructures.html#control-data">Control Data</a>
+</li><li class="toctree-l2"><a class="reference internal" href="dataStructures.html#task-control-block">Task Control Block</a>
+</li><li class="toctree-l2"><a class="reference internal" href="dataStructures.html#fault-analysis-area">Fault Analysis Area</a>
+</li></ul></li><li class="nav-caption"><span class="caption-text">Performance</span></li><li class="toctree-l1"><a class="reference internal" href="perfMemory.html">Memory Allocation</a>
+<ul><li class="toctree-l2"><a class="reference internal" href="perfMemory.html#memory-layout">Memory Layout</a>
+<ul><li class="toctree-l3"><a class="reference internal" href="perfMemory.html#internal-256-byte-ram">INTERNAL 256-BYTE RAM</a>
+</li><li class="toctree-l3"><a class="reference internal" href="perfMemory.html#64-byte-register-block">64-BYTE REGISTER BLOCK</a>
+</li><li class="toctree-l3"><a class="reference internal" href="perfMemory.html#application-dynamic-data-area">APPLICATION DYNAMIC DATA AREA</a>
+</li><li class="toctree-l3"><a class="reference internal" href="perfMemory.html#task-dynamic-data-area">TASK DYNAMIC DATA AREA</a>
+</li><li class="toctree-l3"><a class="reference internal" href="perfMemory.html#task-stack-area">TASK STACK AREA</a>
+</li><li class="toctree-l3"><a class="reference internal" href="perfMemory.html#kernel-task-management-data">KERNEL TASK MANAGEMENT DATA</a>
+</li><li class="toctree-l3"><a class="reference internal" href="perfMemory.html#supervisor-state-stack">SUPERVISOR STATE STACK</a>
+</li><li class="toctree-l3"><a class="reference internal" href="perfMemory.html#memory-mapped-i/o-registers">MEMORY-MAPPED I/O REGISTERS</a>
+</li><li class="toctree-l3"><a class="reference internal" href="perfMemory.html#kernel-code-and-constant-data">KERNEL CODE AND CONSTANT DATA</a>
+</li><li class="toctree-l3"><a class="reference internal" href="perfMemory.html#application-code-and-constant-data">APPLICATION CODE AND CONSTANT DATA</a>
+</li><li class="toctree-l3"><a class="reference internal" href="perfMemory.html#internal-512-byte-eeprom">INTERNAL 512-BYTE EEPROM</a>
+</li><li class="toctree-l3"><a class="reference internal" href="perfMemory.html#internal-8k-rom">INTERNAL 8K ROM</a>
+</li><li class="toctree-l3"><a class="reference internal" href="perfMemory.html#interrupt-vectors">INTERRUPT VECTORS</a>
+</li></ul></li><li class="toctree-l2"><a class="reference internal" href="perfMemory.html#task-memory-allocation">Task Memory Allocation</a>
+</li></ul></li><li class="toctree-l1"><a class="reference internal" href="perfCPU.html">CPU Performance</a>
+<ul><li class="toctree-l2"><a class="reference internal" href="perfCPU.html#context-switch-timing">Context Switch Timing</a>
+</li><li class="toctree-l2"><a class="reference internal" href="perfCPU.html#primitive-timing">Primitive Timing</a>
+</li></ul></li><li class="nav-caption"><span class="caption-text">Configuration Dashboard</span></li><li class="toctree-l1"><a class="reference internal" href="dashOverview.html">Dashboard Introduction</a>
+<ul><li class="toctree-l2"><a class="reference internal" href="dashOverview.html#purpose-of-the-utility">Purpose of the Utility</a>
+</li><li class="toctree-l2"><a class="reference internal" href="dashOverview.html#assembling-and-modifying-the-output-file">Assembling and Modifying the Output File</a>
+</li></ul></li><li class="toctree-l1"><a class="reference internal" href="dashUG.html">Dashboard User Guide</a>
+<ul><li class="toctree-l2"><a class="reference internal" href="dashUG.html#file-location">File Location</a>
+</li><li class="toctree-l2"><a class="reference internal" href="dashUG.html#resource-and-environment-definition">Resource and Environment Definition</a>
+</li><li class="toctree-l2"><a class="reference internal" href="dashUG.html#task-definition">Task Definition</a>
+</li></ul></li>
+</ul>
+</div>
+</div>
+</nav>
+
+<section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<a href="index.html">Home</a>
+<a href="dataStructures.html" class="stealth-btn float-right" title="Accesskey Alt(+Shift)+n">Next</a><span class="bar  float-right">|</span><a href="conventions.html" class="stealth-btn float-right" title="Accesskey Alt(+Shift)+p">Previous</a>
+<div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<div itemprop="articleBody" class="toBeIndexed">
+<div class="document">
+<div class="section" id="interface-specification">
+<h1>Interface Specification</h1>
+<p>This section gives a detailed description of the kernel primitives used to invoke kernel services.</p>
+<p>For each primitive, a functional description is given along with operational considerations particular to the primitive.  This is followed by a description of the actual subroutine call.</p>
+<p>The description shows the C and assembly language macro interface with the required parameters and return value.  All parameters are required, although, parameters not applicable for a particular call contains a place-holding literal such as NOT_USED.</p>
+<p>For the assembly language interface, all registers are preserved, except the D register, which returns the primitive status.  The returned D-register status has the same meaning as the C- language interface status.</p>
+<p>For both C and assembly language, parameters shown in upper case are literal constants, while those in lower case are memory address references.</p>
+<div class="section" id="gettid-get-task-identifier">
+<h2>GETTID Get Task Identifier</h2>
+<p>DESCRIPTION:</p>
+<blockquote>
+<p>This primitive is used to get a task's identifier, which is used with other primitives that reference a task.</p>
+<p>Given a logical task name, defined at compile time, this primitive returns the run-time identity of the task.</p>
+</blockquote>
+<p>CONSIDERATIONS:</p>
+<blockquote>
+<p>The task name is a number between zero and the maximum allowed number of tasks, minus one.  The maximum number of tasks in the kernel is 64.  The task name is assigned in the configuration file.</p>
+<p>The task identifier is a pointer variable to the task's control data structure, however, the application never needs to reference the data structure in normal operation.</p>
+<p>The task must exist in the kernel's task data area. The task may not exist if this primitive is called from a procedure before tasks are created or if the task was terminated as a result of an error detected by the kernel.  In these cases, INV_ADDR is returned as the task identifier.</p>
+<p>Because a task's identity never changes once it is created, this primitive only needs to be called once, usually during initialization.</p>
+<p>This primitive also checks the task's data structures for consistency.</p>
+<p>This is a non-suspending primitive.</p>
+</blockquote>
+<p>C ACCESS:</p>
+<blockquote>
+status = GETTID (tname, tid_pp);</blockquote>
+<p>PARAMETERS:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="13%" />
+<col width="68%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">NAME</th>
+<th class="head">TYPE</th>
+<th class="head">DESCRIPTION</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>tname</td>
+<td>CHAR</td>
+<td>Task logical name</td>
+</tr>
+<tr><td>tid_pp</td>
+<td>BYTE **</td>
+<td>Task id location</td>
+</tr>
+</tbody>
+</table>
+<p>RETURN:</p>
+<blockquote>
+<p>INT SUCCESS Task id available</p>
+<blockquote>
+FAILURE Invalid task name, task does not exist or inconsistent data</blockquote>
+</blockquote>
+<p>ASSEMBLER ACCESS:</p>
+<blockquote>
+%GETTID #TNAME, #tid_p</blockquote>
+</div>
+<div class="section" id="getmytid-get-own-task-identifier">
+<h2>GETMYTID Get Own Task Identifier</h2>
+<p>DESCRIPTION:</p>
+<blockquote>
+This returns the identity of the currently active task.  It operates the same as GETTID, except the task name is not needed.</blockquote>
+<p>CONSIDERATIONS:</p>
+<blockquote>
+<p>The task that invokes this primitive is the currently active task.</p>
+<p>This primitive also verifies the integrity of the task's data structures.</p>
+<p>Because the task's identity does not change after it is created, this primitive
+only needs to be called once.</p>
+<p>This is a non-suspending primitive.</p>
+</blockquote>
+<p>C ACCESS:</p>
+<blockquote>
+status = GETMYTID (tid_pp);</blockquote>
+<p>PARAMETERS:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="13%" />
+<col width="68%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">NAME</th>
+<th class="head">TYPE</th>
+<th class="head">DESCRIPTION</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>tid_pp</td>
+<td>BYTE **</td>
+<td>Task id location</td>
+</tr>
+</tbody>
+</table>
+<p>RETURN:</p>
+<blockquote>
+<p>INT SUCCESS Task id available</p>
+<blockquote>
+FAILURE Task data structure fault detected</blockquote>
+</blockquote>
+<p>ASSEMBLER ACCESS:</p>
+<blockquote>
+%GETMYTID   #tid_p</blockquote>
+</div>
+<div class="section" id="get-crid-get-resource-identifier">
+<h2>GET_CRID Get Resource Identifier</h2>
+<p>DESCRIPTION:</p>
+<blockquote>
+<p>This primitive gives a resource's identifier given the resource's name.</p>
+<p>The identifier is used for the ENTER_CR and EXIT_CR primitives, which
+allow mutually exclusive access to the resource.</p>
+</blockquote>
+<p>CONSIDERATIONS:</p>
+<blockquote>
+<p>Resource names are assigned in the system configuration file.  The name
+is a consecutive number, beginning with zero and ending with one less
+than the number of resources allocated.  Designers may define literals to
+associate more meaningful names with a resource.</p>
+<p>The name is used by this primitive to map to the semaphore data
+structures associated with the resource, however, these data structures
+never need to be referenced by an application.</p>
+<p>Because a resource identifier does not change once it is created by the
+kernel, this primitive only needs to be called once.</p>
+<p>This is a non-suspending primitive.</p>
+</blockquote>
+<p>C ACCESS:</p>
+<blockquote>
+status = GET_CRID (cr_name, crid_p);</blockquote>
+<p>PARAMETERS:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="13%" />
+<col width="68%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">NAME</th>
+<th class="head">TYPE</th>
+<th class="head">DESCRIPTION</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>cr_name</td>
+<td>INT</td>
+<td>Resource logical name</td>
+</tr>
+<tr><td>crid_p</td>
+<td>BYTE **</td>
+<td>Resource id location</td>
+</tr>
+</tbody>
+</table>
+<p>RETURN:</p>
+<blockquote>
+<p>INT SUCCESS Resource id available</p>
+<blockquote>
+FAILURE Invalid resource name</blockquote>
+</blockquote>
+<p>ASSEMBLER ACCESS:</p>
+<blockquote>
+%GET_CRID   #crname, #crid_p</blockquote>
+</div>
+<div class="section" id="enter-cr-get-access-to-resource">
+<h2>ENTER_CR Get Access to Resource</h2>
+<p>DESCRIPTION:</p>
+<blockquote>
+This primitive provides for synchronization on a user-defined resource using a semaphore and guarantees mutually exclusive access to a resource.</blockquote>
+<p>CONSIDERATIONS:</p>
+<blockquote>
+<p>The resource id must first be obtained using the CR_GETID primitive.</p>
+<p>Resource access is managed by a semaphore, and tasks are queued to the
+semaphore on a first-come-first-serve basis.  If the resource is not locked
+by another task, the resource is locked and the calling task continues as
+the active task.  If the resource is not available, the calling task is
+suspended.  The task remains suspended until all previous tasks have
+released exclusive access to the resource.</p>
+<p>If the current task has already locked the resource, this primitive has no
+effect, although an error status is returned.</p>
+<p>This primitive may not be called from an interrupt service routine.</p>
+<p>A resource is released by the EXIT_CR primitive.</p>
+</blockquote>
+<p>C ACCESS:</p>
+<blockquote>
+status = ENTER_CR (cr_id);</blockquote>
+<p>PARAMETERS:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="13%" />
+<col width="68%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">NAME</th>
+<th class="head">TYPE</th>
+<th class="head">DESCRIPTION</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>cr_id</td>
+<td>BYTE *</td>
+<td>Resource id</td>
+</tr>
+</tbody>
+</table>
+<p>RETURN:</p>
+<blockquote>
+<p>INT SUCCESS Access granted and resource locked</p>
+<blockquote>
+FAILURE Invalid resource id or task has already acquired resource.</blockquote>
+</blockquote>
+<p>ASSEMBLER ACCESS:</p>
+<blockquote>
+%ENTER_CR   #crid</blockquote>
+</div>
+<div class="section" id="exit-cr-release-access-to-resource">
+<h2>EXIT_CR Release Access to Resource</h2>
+<p>DESCRIPTION:</p>
+<blockquote>
+Release control of a resource that was obtained with the ENTER_CR
+primitive.</blockquote>
+<p>CONSIDERATIONS:</p>
+<blockquote>
+<p>The resource identifier must first be obtained using the CR_GETID
+primitive, and must be the same identifier used to acquire the resource
+with ENTER_CR.  Only the task that currently has access to the resource
+may unlock the resource.</p>
+<p>When the resource is released, if a higher priority task is waiting on the
+resource, the current task is suspended and the higher priority task
+becomes the active task.  The suspended task becomes active according to
+its assigned priority.</p>
+<p>An error status is returned if the resource was not previously locked, an
+invalid resource id was given or corrupted data structures were detected.</p>
+</blockquote>
+<p>C ACCESS:</p>
+<blockquote>
+status = EXIT_CR (cr_id);</blockquote>
+<p>PARAMETERS:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="13%" />
+<col width="68%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">NAME</th>
+<th class="head">TYPE</th>
+<th class="head">DESCRIPTION</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>cr_id</td>
+<td>BYTE *</td>
+<td>Resource id</td>
+</tr>
+</tbody>
+</table>
+<p>RETURN:</p>
+<blockquote>
+<p>INT SUCCESS Resource released</p>
+<blockquote>
+FAILURE Invalid resource id, resource not acquired with previous ENTER_CR by this task or corrupted kernel data detected.</blockquote>
+</blockquote>
+<p>ASSEMBLER ACCESS:</p>
+<blockquote>
+%EXIT_CR    #crid</blockquote>
+</div>
+<div class="section" id="enter-scr-get-exclusive-access-to-processor">
+<h2>ENTER_SCR Get Exclusive Access to Processor</h2>
+<p>DESCRIPTION:</p>
+<blockquote>
+Obtain mutually exclusive access to the processor.</blockquote>
+<p>CONSIDERATIONS:</p>
+<blockquote>
+<p>This primitive is implemented by disabling maskable interrupts, and is
+not associated with a particular resource.  Access is released by
+EXIT_SCR.</p>
+<p>This primitive is recommended for mutually exclusive access of short
+Duration because kernel time-related function is affected.</p>
+<p>The processor condition code register is preserved upon return from the
+EXIT_SCR primitive.</p>
+<p>This is a non-suspending primitive.</p>
+</blockquote>
+<p>C ACCESS:</p>
+<blockquote>
+status = ENTER_SCR ();</blockquote>
+<p>PARAMETERS:  none</p>
+<p>RETURN:  none</p>
+<p>ASSEMBLER ACCESS:</p>
+<blockquote>
+%ENTER_CR</blockquote>
+<p>EXIT_SCR Release Exclusive Access to Processor</p>
+<p>DESCRIPTION:</p>
+<blockquote>
+This primitive is the complement of ENTER_SCR and releases mutually exclusive control of the processor.</blockquote>
+<p>CONSIDERATIONS:</p>
+<blockquote>
+<p>The processor condition code register at the time ENTER_SCR was called
+are restored.</p>
+<p>This primitive must not be called without a previous call to ENTER_SCR.</p>
+</blockquote>
+<p>C ACCESS:</p>
+<blockquote>
+status = EXIT_SCR ();</blockquote>
+<p>PARAMETERS:  none</p>
+<p>RETURN:  none</p>
+<p>ASSEMBLER ACCESS:</p>
+<blockquote>
+%EXIT_CR</blockquote>
+</div>
+<div class="section" id="signal-signal-event-occurrence">
+<h2>SIGNAL Signal Event Occurrence</h2>
+<p>DESCRIPTION:</p>
+<blockquote>
+This primitive provides a synchronization mechanism by signaling a task that one or more events occurred.</blockquote>
+<p>CONSIDERATIONS:</p>
+<blockquote>
+<p>The task to be signaled must exist and may be the current task.</p>
+<p>The event_id is a user-defined bit map with each bit corresponding to an
+Event. Events may be defined between tasks for a total of 16 events per
+task, or at the system level for a total of 16 system events.  Event
+agreement between tasks is a design issue.</p>
+<p>If a higher priority task is waiting for the event(s), and all wait criteria are
+satisfied, the signaling task is suspended.  The task resumes as the active
+task, according to its assigned priority.</p>
+<p>If all wait criteria of the signaled task are not satisfied, the event is posted
+to the signaled task, whether or not the task has a WAIT request pending.</p>
+<p>The task identifier of the task to be signaled must be obtained using the
+GETTID or GETMYTID primitives.</p>
+</blockquote>
+<p>C ACCESS:</p>
+<blockquote>
+status = SIGNAL (tid, event_id);</blockquote>
+<p>PARAMETERS:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="13%" />
+<col width="68%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">NAME</th>
+<th class="head">TYPE</th>
+<th class="head">DESCRIPTION</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>tid</td>
+<td>BYTE *</td>
+<td>Task identifier</td>
+</tr>
+<tr><td>event_id</td>
+<td>WORD</td>
+<td>Event identifier</td>
+</tr>
+</tbody>
+</table>
+<p>RETURN:</p>
+<blockquote>
+<p>INT SUCCESS Task signalled</p>
+<blockquote>
+FAILURE Task does not exist or corrupted data detected</blockquote>
+</blockquote>
+<p>ASSEMBLER ACCESS:</p>
+<blockquote>
+%SIGNAL #taskid, #EVENTID</blockquote>
+</div>
+<div class="section" id="wait-wait-for-event-occurrence">
+<h2>WAIT Wait for Event Occurrence</h2>
+<p>DESCRIPTION:</p>
+<blockquote>
+This primitive complements SIGNAL and allows a task to wait for one or more events to occur.</blockquote>
+<p>CONSIDERATIONS:</p>
+<blockquote>
+<p>The event_id is a user-defined bit map with each bit corresponding to an
+event; events may be defined between tasks or at the system level, and
+agreement between tasks is a design issue.</p>
+<p>The calling task may request a wait for all specified events to occur (AND-
+conditional), or for any one of the events to occur (OR-conditional).</p>
+<p>A WAIT condition is considered satisfied when, either a logical AND
+condition was specified and all requested events were received, or a
+logical OR condition was specified and any of the requested events was
+received.</p>
+<p>All events are cleared, including those that were not used to complete the
+wait, when the task is resumed.</p>
+<p>This primitive may not be called from an interrupt service routine.</p>
+</blockquote>
+<p>C ACCESS:</p>
+<blockquote>
+status = WAIT (evt_desc, e_logic, tout_val);</blockquote>
+<p>PARAMETERS:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="13%" />
+<col width="68%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">NAME</th>
+<th class="head">TYPE</th>
+<th class="head">DESCRIPTION</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>evt_desc</td>
+<td>WORD</td>
+<td>Event(s) specification bit map</td>
+</tr>
+<tr><td>e_logic</td>
+<td>INT</td>
+<td>EVT_OR  OR condition
+EVT_AND AND condition</td>
+</tr>
+<tr><td>tout_val</td>
+<td>INT</td>
+<td>Suspension timeout</td>
+</tr>
+</tbody>
+</table>
+<p>RETURN:</p>
+<blockquote>
+<p>INT SUCCESS Requested event(s) occurred</p>
+<blockquote>
+<p>FAILURE Invalid parameter</p>
+<p>TIMEOUT Timeout occurred before requested event(s)</p>
+</blockquote>
+</blockquote>
+<p>ASSEMBLER ACCESS:</p>
+<blockquote>
+%WAIT   #EVENTID, #EVENTLOGIC, #TIMEOUT</blockquote>
+</div>
+<div class="section" id="send-send-message-to-task">
+<h2>SEND Send Message to Task</h2>
+<p>DESCRIPTION:</p>
+<blockquote>
+This primitive provides intertask communication, using messages, as a task synchronization mechanism.</blockquote>
+<p>CONSIDERATIONS:</p>
+<blockquote>
+<p>The destination task must exist, and receives the message with the RECV primitive.  The destination task may be the current task.</p>
+<p>If a higher priority task is waiting for a message, the sending task is suspended.  The sending task resumes as the active task according to its assigned priority.</p>
+<p>Multiple messages may be queued to a task, and are serviced with a first-in-first-out discipline.  Also, messages are posted to a task regardless of whether or not a RECV is currently pending.</p>
+<p>This is an asynchronous operation because the sending task does not wait for a response from the destination task.  End-to-end confirmation of message delivery is done by the application.</p>
+<p>Message identifiers and message content are defined between message origination and destination tasks at design time.</p>
+<p>No message data is copied during the message transfer, only the pointer to the message is passed to the destination task; it is the responsibility of both tasks to coordinate allocation and freeing of the message data area.  The message location and size parameters refer only to application message data.  Memory does not need to be reserved for message management because this is handled by the kernel.</p>
+<p>The total number of messages that may be active at any given time are defined in the system configuration file.</p>
+</blockquote>
+<p>C ACCESS:</p>
+<blockquote>
+status = SEND (tid, msgid, msg_p, msgsiz);</blockquote>
+<p>PARAMETERS:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="13%" />
+<col width="68%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">NAME</th>
+<th class="head">TYPE</th>
+<th class="head">DESCRIPTION</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>tid</td>
+<td>BYTE *</td>
+<td>Destination task id</td>
+</tr>
+<tr><td>msgid</td>
+<td>INT</td>
+<td>Message id tag</td>
+</tr>
+<tr><td>msg_p</td>
+<td>CHAR *</td>
+<td>Message location</td>
+</tr>
+<tr><td>msgsiz</td>
+<td>WORD</td>
+<td>Message length</td>
+</tr>
+</tbody>
+</table>
+<p>RETURN:</p>
+<blockquote>
+<p>INT SUCCESS Message sent to task</p>
+<blockquote>
+FAILURE Unable to send message; invalid destination or resources not available</blockquote>
+</blockquote>
+<p>ASSEMBLER ACCESS:</p>
+<blockquote>
+%SEND   #taskid, #MSGID, #msg_p, #msgsiz</blockquote>
+</div>
+<div class="section" id="recv-wait-for-message-from-task">
+<h2>RECV Wait for Message from Task</h2>
+<p>DESCRIPTION:</p>
+<blockquote>
+This primitive complements the SEND synchronization primitive to receive a message from a task.</blockquote>
+<p>CONSIDERATIONS:</p>
+<blockquote>
+<p>The receiving task continues to receive any queued messages as long as they are available, without suspension, until a task of higher priority becomes ready to run.  Care should be taken in system design to ensure control is released to the scheduler within the watchdog timer period.</p>
+<p>When the task resumes after the RECV call, the received message is removed from the task's message queue and any timeout request is canceled.</p>
+<p>If a timeout occurs before a message is received, the task becomes active according to its assigned priority.</p>
+<p>The message address returned is the location of the message provided by the task that sent the message.  The message area is managed by the sending and receiving tasks.</p>
+<p>Message id and message content agreement between origination and destination tasks is defined at compile time.</p>
+<p>This primitive may not be called from an interrupt service routine.</p>
+</blockquote>
+<p>C ACCESS:</p>
+<blockquote>
+status = RECV(msgid_p, msg_pp, msgsiz_p, tout_val);</blockquote>
+<p>PARAMETERS:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="13%" />
+<col width="68%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">NAME</th>
+<th class="head">TYPE</th>
+<th class="head">DESCRIPTION</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>msgid_p</td>
+<td>INT *</td>
+<td>Address for message id tag</td>
+</tr>
+<tr><td>msg_pp</td>
+<td>CHAR **</td>
+<td>Address for message location</td>
+</tr>
+<tr><td>msgsiz_p</td>
+<td>WORD *</td>
+<td>Address for message length</td>
+</tr>
+<tr><td>tout_val</td>
+<td>INT</td>
+<td>Suspension timeout</td>
+</tr>
+</tbody>
+</table>
+<p>RETURN:</p>
+<blockquote>
+<p>INT SUCCESS Message available</p>
+<blockquote>
+<p>FAILURE Parameter error</p>
+<p>TIMEOUT Timeout occurred</p>
+</blockquote>
+</blockquote>
+<p>ASSEMBLER ACCESS:</p>
+<blockquote>
+%RECV   #msgid_p, #msg_pp, #msgsiz_p, #TIMEOUT</blockquote>
+</div>
+<div class="section" id="alert-request-wakeup-after-time-interval">
+<h2>ALERT Request Wakeup after Time Interval</h2>
+<p>DESCRIPTION:</p>
+<blockquote>
+Request for the task to be signaled after a specified amount of time has elapsed.</blockquote>
+<p>CONSIDERATIONS:</p>
+<blockquote>
+<p>This is a suspending primitive.</p>
+<p>When the timeout occurs, the task is scheduled to run according to its assigned priority.</p>
+<p>There is no provision to cancel an alert request before the timeout occurs.</p>
+<p>If NO_TOUT is requested, this primitive has no effect and the task continues as the active task.</p>
+<p>The time interval is associated with the real-time clock interrupt rate and is accurate to within one clock increment.</p>
+<p>The alert request applies to the currently active task and may not be called from an ISR.</p>
+<p>The time interval parameter is expressed in 100-millisecond units.  The minimum time interval that may be requested is 100 milliseconds and the maximum is 6553.5 seconds.  Accuracy is + 100 milliseconds.</p>
+</blockquote>
+<p>C ACCESS:</p>
+<blockquote>
+status = ALERT (tout_val);</blockquote>
+<p>PARAMETERS:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="13%" />
+<col width="68%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">NAME</th>
+<th class="head">TYPE</th>
+<th class="head">DESCRIPTION</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>tout_val</td>
+<td>INT</td>
+<td>Elapsed time value in 100 millisecond increments</td>
+</tr>
+</tbody>
+</table>
+<p>RETURN:</p>
+<blockquote>
+<p>INT TIMEOUT Requested time has expired</p>
+<blockquote>
+FAILURE Unable to handle alert request</blockquote>
+</blockquote>
+<p>ASSEMBLER ACCESS:</p>
+<blockquote>
+%ALERT  #TIMEOUT</blockquote>
+</div>
+<div class="section" id="gettik-get-current-system-timer-value">
+<h2>GETTIK Get Current System Timer Value</h2>
+<p>DESCRIPTION:</p>
+<blockquote>
+Get the current system time counter value.</blockquote>
+<p>CONSIDERATIONS:</p>
+<blockquote>
+The value is a continuous, 16-bit, 100 millisecond counter.</blockquote>
+<p>C ACCESS:</p>
+<blockquote>
+status = GETTIK (tikval_p)</blockquote>
+<p>PARAMETERS:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="13%" />
+<col width="68%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">NAME</th>
+<th class="head">TYPE</th>
+<th class="head">DESCRIPTION</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>tikval_p</td>
+<td>WORD *</td>
+<td>Current timer value location</td>
+</tr>
+</tbody>
+</table>
+<p>RETURN:</p>
+<blockquote>
+<p>INT SUCCESS Timer value available</p>
+<blockquote>
+FAILURE Kernel fault</blockquote>
+</blockquote>
+<p>ASSEMBLER ACCESS:</p>
+<blockquote>
+%GETTIK #tikval_p</blockquote>
+</div>
+<div class="section" id="q-getid-get-queue-identifier">
+<h2>Q_GETID Get Queue Identifier</h2>
+<p>DESCRIPTION:</p>
+<blockquote>
+Get the linked-list queue identifier, given a queue name.  The identifier is used for queue access primitives.</blockquote>
+<p>CONSIDERATIONS:</p>
+<blockquote>
+<p>The queue is a linked list, with a first-in-first-out discipline.</p>
+<p>The queue name is a value between zero and 255.  These are defined in the configuration file, beginning with zero and progressing sequentially for the number of queues defined.</p>
+<p>The queue control blocks are allocated in the kernel address space.  The only data structure requirement imposed on the application is that the first two bytes of the queued item be reserved for linked list management.  However, this pointer should never be written to by the application.</p>
+</blockquote>
+<p>C ACCESS:</p>
+<blockquote>
+status = Q_GETID (q_name, qid);</blockquote>
+<p>PARAMETERS:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="13%" />
+<col width="68%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">NAME</th>
+<th class="head">TYPE</th>
+<th class="head">DESCRIPTION</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>q_name</td>
+<td>INT</td>
+<td>Queue name</td>
+</tr>
+<tr><td>qid</td>
+<td>CHAR *</td>
+<td>Queue id</td>
+</tr>
+</tbody>
+</table>
+<p>RETURN:</p>
+<blockquote>
+<p>INT SUCCESS Queue id available</p>
+<blockquote>
+FAILURE Invalid queue name</blockquote>
+</blockquote>
+<p>ASSEMBLER ACCESS:</p>
+<blockquote>
+%Q_GETID    #QNAME, #qid</blockquote>
+</div>
+<div class="section" id="q-clear-initialize-queue">
+<h2>Q_CLEAR Initialize Queue</h2>
+<p>DESCRIPTION:</p>
+<blockquote>
+Initialize the specified queue</blockquote>
+<p>CONSIDERATIONS:</p>
+<blockquote>
+The queue control block pointers are reset to indicate there are no queued items.</blockquote>
+<p>C ACCESS:</p>
+<blockquote>
+status = Q_CLEAR (qid);</blockquote>
+<p>PARAMETERS:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="13%" />
+<col width="68%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">NAME</th>
+<th class="head">TYPE</th>
+<th class="head">DESCRIPTION</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>qid</td>
+<td>CHAR *</td>
+<td>Queue id</td>
+</tr>
+</tbody>
+</table>
+<p>RETURN:</p>
+<blockquote>
+<p>INT SUCCESS Queue initialized</p>
+<blockquote>
+FAILURE Invalid queue id</blockquote>
+</blockquote>
+<p>ASSEMBLER ACCESS:</p>
+<blockquote>
+%Q_CLEAR #qid</blockquote>
+<p>Q_GET Get Item from Linked-list Queue</p>
+<p>DESCRIPTION:</p>
+<blockquote>
+Get the next item from a linked list queue.</blockquote>
+<p>CONSIDERATIONS:</p>
+<blockquote>
+<p>Items returned from the queue have a link pointer of type BYTE * as the first two bytes of the returned item.</p>
+<p>Queue discipline is first-in-first-out.</p>
+<p>Exclusive access is guaranteed to the calling task, and the task is not suspended if there are no queued items.</p>
+</blockquote>
+<p>C ACCESS:</p>
+<blockquote>
+status = Q_GET (qid, item_pp);</blockquote>
+<p>PARAMETERS:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="13%" />
+<col width="68%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">NAME</th>
+<th class="head">TYPE</th>
+<th class="head">DESCRIPTION</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>qid</td>
+<td>CHAR *</td>
+<td>Queue id</td>
+</tr>
+<tr><td>item_pp</td>
+<td>CHAR **</td>
+<td>Address for queue item</td>
+</tr>
+</tbody>
+</table>
+<p>RETURN:</p>
+<blockquote>
+<p>INT SUCCESS Item dequeued</p>
+<blockquote>
+<p>FAILURE Invalid queue id</p>
+<p>LIMIT   Queue is empty</p>
+</blockquote>
+</blockquote>
+<p>ASSEMBLER ACCESS:</p>
+<blockquote>
+%Q_GET #qid, #item_pp</blockquote>
+</div>
+<div class="section" id="q-put-add-item-to-linked-list-queue">
+<h2>Q_PUT Add Item to Linked-list Queue</h2>
+<p>DESCRIPTION:</p>
+<blockquote>
+Add an item as the last entry of a linked list queue.</blockquote>
+<p>CONSIDERATIONS:</p>
+<blockquote>
+<p>The queue is a linked list.  Items to be queued must reserve a link pointer of type BYTE * as the first two bytes of the item to be queued.</p>
+<p>Queue discipline is first-in-first-out.</p>
+<p>The calling task is guaranteed exclusive access to the queue, and is not suspended.</p>
+<p>There is no limit on the number of items that may be queued, other than the availability of memory for items to queue.</p>
+<p>An error status is returned if an attempt is made to queue an item more than once to any queue.</p>
+</blockquote>
+<p>C ACCESS:</p>
+<blockquote>
+status = Q_PUT (qid, item_p);</blockquote>
+<p>PARAMETERS:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="13%" />
+<col width="68%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">NAME</th>
+<th class="head">TYPE</th>
+<th class="head">DESCRIPTION</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>qid</td>
+<td>CHAR *</td>
+<td>Queue id</td>
+</tr>
+<tr><td>item_p</td>
+<td>CHAR *</td>
+<td>Queue item location</td>
+</tr>
+</tbody>
+</table>
+<p>RETURN:</p>
+<blockquote>
+<p>INT SUCCESS Item queued</p>
+<blockquote>
+FAILURE Invalid queue id or item is already queued.</blockquote>
+</blockquote>
+<p>ASSEMBLER ACCESS:</p>
+<blockquote>
+%Q_PUT #qid, #item_p</blockquote>
+</div>
+<div class="section" id="locate-mem-locate-task-dynamic-memory">
+<h2>LOCATE_MEM Locate Task Dynamic Memory</h2>
+<p>DESCRIPTION:</p>
+<blockquote>
+Get the location of a dynamic memory partition allocated to the current task.</blockquote>
+<p>CONSIDERATIONS:</p>
+<blockquote>
+<p>This memory partition is never used by the kernel, unlike the tasks' stack area, and is only made known to the task assigned to the partition.  Once the task locates its memory, there are no restrictions on its use and it may be made available to other tasks.</p>
+<p>This primitive only needs to be called once, preferably at task initialization time.</p>
+<p>Higher level memory management functions are the responsibility of the task; memory is never released through the kernel.</p>
+<p>The memory is defined in the configuration file, by specifying the memory size needed by the task.  The requested size is guaranteed to the task at run-time, although the location is determined by the kernel from available memory.</p>
+</blockquote>
+<p>C ACCESS:</p>
+<blockquote>
+status = LOCATE_MEM (mem_pp);</blockquote>
+<p>PARAMETERS:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="13%" />
+<col width="68%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">NAME</th>
+<th class="head">TYPE</th>
+<th class="head">DESCRIPTION</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>mem_pp</td>
+<td>CHAR **</td>
+<td>Address for task's dynamic memory location; INV_ADDR is
+returned if memory has not been allocated for the task.</td>
+</tr>
+</tbody>
+</table>
+<p>RETURN:</p>
+<blockquote>
+<p>INT SUCCESS Memory location available</p>
+<blockquote>
+FAILURE Memory not allocated for task</blockquote>
+</blockquote>
+<p>ASSEMBLER ACCESS:</p>
+<blockquote>
+%LOCATE_MEM #mem_pp</blockquote>
+</div>
+<div class="section" id="log-fatal-indicate-fatal-fault-occurrence">
+<h2>LOG_FATAL Indicate Fatal Fault Occurrence</h2>
+<p>DESCRIPTION:</p>
+<blockquote>
+Log fatal-type fault and initiate recovery.</blockquote>
+<p>CONSIDERATIONS:</p>
+<blockquote>
+<p>If a task has been defined in the configuration file as a fault handler, the task is signaled with EVT_0, to indicate a fatal fault occurred, provided the fault did not occur in the fault handler task.</p>
+<p>If a task detects and reports a fatal-type fault or the kernel detects a fatal-type fault in the task domain, the task is removed from the list of available tasks and is never scheduled to run again.  In this case, this primitive returns to the scheduler and the system continues to run, as much as possible without the affected task.</p>
+<p>If a fatal-type fault is detected in the kernel domain or in hardware on which the kernel is dependent, system integrity cannot be guaranteed and a STOP instruction is executed.  Upon reset, the fault is signaled to the fault handler task, if one was defined.</p>
+<p>In all cases, fault-related information is logged to the fault analysis area for future reference.  This includes fault location, fault-specific data, task and kernel stack areas, and kernel and task states.  These data are preserved until the next fault, even through a system reset.</p>
+</blockquote>
+<p>C ACCESS:</p>
+<blockquote>
+status = LOG_FATAL (loc, qual);</blockquote>
+<p>PARAMETERS:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="13%" />
+<col width="68%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">NAME</th>
+<th class="head">TYPE</th>
+<th class="head">DESCRIPTION</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>loc</td>
+<td>WORD</td>
+<td>Fault location code</td>
+</tr>
+<tr><td>qual</td>
+<td>WORD</td>
+<td>ault qualifier</td>
+</tr>
+</tbody>
+</table>
+<p>RETURN:  Not applicable</p>
+<p>ASSEMBLER ACCESS:</p>
+<blockquote>
+%LOG_FATAL #LOC, #QUAL</blockquote>
+</div>
+<div class="section" id="log-warn-indicate-non-fatal-fault-occurrence">
+<h2>LOG_WARN Indicate Non-fatal Fault Occurrence</h2>
+<p>DESCRIPTION:</p>
+<blockquote>
+Report a warning-type fault.</blockquote>
+<p>CONSIDERATIONS:</p>
+<blockquote>
+<p>This primitive is used if detected faults are notable but may not compromise the system.</p>
+<p>For warning-type faults, only the fault location and fault-specific data, if any, are logged to the Fault Analysis Area.  If a task has been defined in the configuration file as a fault handler, the task signaled with EVT_1, to indicate a warning-type fault occurred, and the task may query the fault analysis area.</p>
+</blockquote>
+<p>C ACCESS:</p>
+<blockquote>
+status = LOG_WARN (loc, qual);</blockquote>
+<p>PARAMETERS:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="13%" />
+<col width="68%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">NAME</th>
+<th class="head">TYPE</th>
+<th class="head">DESCRIPTION</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>loc</td>
+<td>WORD</td>
+<td>Fault location code</td>
+</tr>
+<tr><td>qual</td>
+<td>WORD</td>
+<td>ault qualifier</td>
+</tr>
+</tbody>
+</table>
+<p>RETURN:</p>
+<blockquote>
+INT SUCCESS Fault is logged</blockquote>
+<p>ASSEMBLER ACCESS:</p>
+<blockquote>
+%LOG_WARN #LOC, #QUAL</blockquote>
+<p>ENTER_SSTATE Enter Supervisory State</p>
+<p>DESCRIPTION:</p>
+<blockquote>
+This primitive is the mechanism for an interrupt service routine invoke supervisory state processing.</blockquote>
+<p>CONSIDERATIONS:</p>
+<blockquote>
+<p>This primitive allows the calling interrupt service routine and nested interrupt service routines to switch to the common system stack.</p>
+<p>The last interrupt service routine to exit the supervisory state returns control to the interrupted task and switches to the task stack.</p>
+<p>For every ENTER_SSTATE call, there must be a matching EXIT_SSTATE call.</p>
+</blockquote>
+<p>C ACCESS:</p>
+<blockquote>
+ENTER_SSTATE ();</blockquote>
+<p>PARAMETERS:  none</p>
+<p>RETURN:  none</p>
+<p>ASSEMBLER ACCESS:</p>
+<blockquote>
+%ENTER_SSTATE</blockquote>
+</div>
+<div class="section" id="exit-sstate-exit-supervisory-state">
+<h2>EXIT_SSTATE Exit Supervisory State</h2>
+<p>DESCRIPTION:</p>
+<blockquote>
+This primitive complements the ENTER_SSTATE primitive, and returns to the task state from the supervisory state.</blockquote>
+<p>CONSIDERATIONS:</p>
+<blockquote>
+<p>For every ENTER_SSTATE call, there must be a matching EXIT_SSTATE call.</p>
+<p>Interrupts may be nested and ENTER_SSTATE primitive calls may be nested.  If EXIT_SSTATE is called by an interrupt service routine that is not the last interrupt service routine pending, processing continues in the supervisory state.</p>
+<p>The last interrupt service routine to exit the supervisory state returns control to the interrupted task and switches to the task stack.</p>
+</blockquote>
+<p>C ACCESS:</p>
+<blockquote>
+EXIT_SSTATE ();</blockquote>
+<p>PARAMETERS:  none</p>
+<p>RETURN:  none</p>
+<p>ASSEMBLER ACCESS:</p>
+<blockquote>
+%EXIT_SSTATE</blockquote>
+</div>
+</div>
+</div>
+
+</div><!-- /.toBeIndexed -->
+</div>
+<footer>
+<div class="rst-footer-nav" role="navigation" aria-label="footer navigation">
+
+<a href="conventions.html" title="Accesskey Alt(+Shift)+p" accesskey="p">Previous</a><span class="bar">|</span><a href="dataStructures.html" title="Accesskey Alt(+Shift)+n" accesskey="n">Next</a>
+</div></footer>
+</div>
+</div>
+</section>
+</div>
+
+
+<script type="text/javascript">
+var DOCUMENTATION_OPTIONS = {
+URL_ROOT:'./',
+VERSION:'',
+COLLAPSE_INDEX:false,
+FILE_SUFFIX:'.html',
+HAS_SOURCE:  true
+};
+</script>
+<script type="text/javascript" src="static/js/jquery.min.js"></script>
+<script type="text/javascript" src="static/js/underscore.js"></script>
+<script type="text/javascript" src="static/js/doctools.js"></script>
+<script type="text/javascript" src="static/js/language_data.js"></script>
+<script type="text/javascript" src="static/js/searchtools.js"></script>
+<script type="text/javascript" src="static/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="static/js/theme.js"></script>
+<script type="text/javascript">
+jQuery(function () {
+SphinxRtdTheme.StickyNav.enable();
+});
+</script>
+<script type="text/javascript" id="idPiwikScriptPlaceholder"></script>
+<header>
+<div class="header__container">
+<a href="index.html"><img class="raw_img" height="64" src="img/bannerLogo.png" alt="Documentation" /></a>
+
+<ul class="header__links"><li><a href="https://github.community/">Community</a></li><li><a href="https://github.com/ghartsel/DoreStaticSiteGenerator/tree/master/demo">GitHub</a></li><li><a href="https://www.gh.works/">About</a></li></ul>
+</div>
+</header>
+</body>
+</html>

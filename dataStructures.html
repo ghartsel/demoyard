@@ -179,16 +179,120 @@
 <div class="wy-nav-content">
 <div class="rst-content">
 <a href="index.html">Home</a>
-
+<a href="perfMemory.html" class="stealth-btn float-right" title="Accesskey Alt(+Shift)+n">Next</a><span class="bar  float-right">|</span><a href="ifSpecification.html" class="stealth-btn float-right" title="Accesskey Alt(+Shift)+p">Previous</a>
 <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
 <div itemprop="articleBody" class="toBeIndexed">
+<div class="document">
+<div class="section" id="data-structures">
+<h1>Data Structures</h1>
+<p>The data described below are useful during debugging to determine the kernel and task states.</p>
+<p>These data are used exclusively by the kernel and never need to be referenced by application software.</p>
+<p>Refer to the section on memory layout for the location of these data, which are shown below as C- language structures.</p>
+<div class="section" id="control-data">
+<h2>Control Data</h2>
+<pre class="code c literal-block">
+<span class="keyword">typedef</span> <span class="keyword">struct</span>
+<span class="punctuation">{</span>
+    <span class="name">FAA</span>  <span class="name">faa</span><span class="punctuation">;</span>                 <span class="name">fault</span> <span class="name">analysis</span> <span class="name">area</span>
+    <span class="name">CHAR</span> <span class="name">monstk</span><span class="punctuation">[</span><span class="name">SSTK_SIZ</span><span class="punctuation">];</span>    <span class="name">initialization</span> <span class="name">stack</span>
+    <span class="name">QCB</span>  <span class="name">sk_q_pr0</span><span class="punctuation">;</span>            <span class="name">task</span> <span class="name">scheduler</span> <span class="name">queues</span>
+    <span class="name">QCB</span>  <span class="name">sk_q_pr1</span><span class="punctuation">;</span>
+    <span class="name">QCB</span>  <span class="name">sk_q_pr2</span><span class="punctuation">;</span>
+    <span class="name">QCB</span>  <span class="name">msg_free_q</span><span class="punctuation">;</span>          <span class="name">free</span> <span class="name">message</span> <span class="name">queue</span>
+    <span class="name">CHAR</span> <span class="name">istate</span><span class="punctuation">;</span>              <span class="name">kernel</span> <span class="name">state</span>
+    <span class="name">TCB</span> <span class="operator">*</span><span class="name">curtsk</span><span class="punctuation">;</span>              <span class="name">currently</span> <span class="name">active</span> <span class="name">task</span>
+    <span class="name">TCB</span> <span class="operator">*</span><span class="name">flttsk</span><span class="punctuation">;</span>              <span class="name">fault</span> <span class="name">management</span> <span class="name">task</span>
+    <span class="name">INT</span> <span class="name">task_cnt</span><span class="punctuation">;</span>             <span class="name">total</span> <span class="name">number</span> <span class="name">of</span> <span class="name">tasks</span>
+    <span class="name">WORD</span> <span class="name">clktik_cnt</span><span class="punctuation">;</span>          <span class="name">continuous</span> <span class="name">timer</span> <span class="name">counter</span>
+    <span class="name">CHAR</span> <span class="name">clktik_skip</span><span class="punctuation">;</span>         <span class="name">timer</span> <span class="name">rate</span> <span class="name">adjustment</span>
+    <span class="name">CHAR</span> <span class="name">curbnk</span><span class="punctuation">;</span>              <span class="name">currently</span> <span class="name">active</span> <span class="name">bank</span>
+    <span class="name">TCB</span> <span class="operator">*</span><span class="name">tcbblk_p</span><span class="punctuation">;</span> <span class="name label">locations</span><span class="punctuation">:</span> <span class="name">task</span> <span class="name">control</span> <span class="name">blocks</span>
+    <span class="name">QCB</span> <span class="operator">*</span><span class="name">queblk_p</span><span class="punctuation">;</span>            <span class="name">queue</span> <span class="name">resource</span> <span class="name">blocks</span>
+    <span class="name">CHAR</span> <span class="operator">*</span><span class="name">semblk_p</span><span class="punctuation">;</span>           <span class="name">semaphore</span> <span class="name">block</span>
+    <span class="name">MSG_D</span> <span class="operator">*</span><span class="name">msgblk_p</span><span class="punctuation">;</span>          <span class="name">message</span> <span class="name">resource</span> <span class="name">block</span>
+    <span class="name">CHAR</span> <span class="operator">*</span><span class="name">clkblk_p</span><span class="punctuation">;</span>           <span class="name">interval</span> <span class="name">timer</span> <span class="name">block</span>
+    <span class="name">CHAR</span> <span class="operator">*</span><span class="name">dmemblk_p</span><span class="punctuation">;</span>          <span class="name">memory</span> <span class="name">allocation</span> <span class="name">ctrl</span><span class="punctuation">.</span>
+    <span class="name">CHAR</span> <span class="operator">*</span><span class="name">sstktop_p</span><span class="punctuation">;</span>          <span class="name">top</span> <span class="name">of</span> <span class="name">supervisor</span> <span class="name">stack</span>
+<span class="punctuation">}</span> <span class="name">KDD</span><span class="punctuation">;</span>
+</pre>
+</div>
+<div class="section" id="task-control-block">
+<h2>Task Control Block</h2>
+<p>These data describe a task instance.</p>
+<pre class="code c literal-block">
+<span class="keyword">typedef</span> <span class="keyword">struct</span>
+<span class="punctuation">{</span>
+    <span class="name">BYTE</span> <span class="operator">*</span><span class="name">tcb_link</span><span class="punctuation">;</span>           <span class="name">linked</span> <span class="name">list</span> <span class="name">pointer</span>
+    <span class="name">CHAR</span>  <span class="name">tname</span><span class="punctuation">;</span>              <span class="name">task</span> <span class="name">name</span>
+    <span class="name">CHAR</span>  <span class="name">tattr</span><span class="punctuation">;</span>              <span class="name">task</span><span class="operator">-</span><span class="name">type</span> <span class="name">data</span> <span class="name">marker</span>
+    <span class="name">INT</span>   <span class="punctuation">(</span><span class="operator">*</span><span class="name">ent_pt</span><span class="punctuation">)();</span>        <span class="name">task</span> <span class="name">entry</span> <span class="name">point</span>
+    <span class="name">QCB</span>  <span class="operator">*</span><span class="name">priority_qp</span><span class="punctuation">;</span>        <span class="name">task</span> <span class="name">priority</span>
+    <span class="name">CHAR</span> <span class="operator">*</span><span class="name">stktop</span><span class="punctuation">;</span>             <span class="name">top</span> <span class="name">of</span> <span class="name">task</span> <span class="name">stack</span>
+    <span class="name">CHAR</span> <span class="operator">*</span><span class="name">stkend</span><span class="punctuation">;</span>             <span class="name">end</span> <span class="name">of</span> <span class="name">task</span> <span class="name">stack</span>
+    <span class="name">CHAR</span> <span class="operator">*</span><span class="name">stk_p</span><span class="punctuation">;</span>              <span class="name">current</span> <span class="name">stack</span> <span class="name">pointer</span>
+    <span class="name">QCB</span>   <span class="name">w_que</span><span class="punctuation">;</span>              <span class="name">task</span> <span class="name">wait</span> <span class="name">queue</span>
+    <span class="name">CHAR</span>  <span class="name">state</span><span class="punctuation">;</span>              <span class="name">current</span> <span class="name">task</span> <span class="name">state</span>
+    <span class="name">EVT_D</span> <span class="name">evt</span><span class="punctuation">;</span>                <span class="name">task</span> <span class="name">event</span> <span class="name">management</span>
+    <span class="name">QCB</span>   <span class="name">msg_q</span><span class="punctuation">;</span>              <span class="name">task</span> <span class="name">message</span> <span class="name">list</span>
+<span class="punctuation">}</span> <span class="name">TCB</span><span class="punctuation">;</span>
+<span class="keyword">typedef</span> <span class="keyword">struct</span>
+<span class="punctuation">{</span>
+    <span class="name">CHAR</span> <span class="name">q_mark</span><span class="punctuation">;</span>              <span class="name">queue</span><span class="operator">-</span><span class="name">type</span> <span class="name">data</span> <span class="name">marker</span>
+    <span class="name">CHAR</span> <span class="name">q_sem</span><span class="punctuation">;</span>               <span class="name">queue</span> <span class="name">semaphore</span>
+    <span class="name">BYTE</span> <span class="operator">**</span><span class="name">head</span><span class="punctuation">;</span>              <span class="name">head</span> <span class="name">item</span> <span class="name">pointer</span>
+    <span class="name">BYTE</span> <span class="operator">**</span><span class="name">tail</span><span class="punctuation">;</span>              <span class="name">tail</span> <span class="name">item</span> <span class="name">pointer</span>
+<span class="punctuation">}</span> <span class="name">QCB</span><span class="punctuation">;</span>
+<span class="keyword">typedef</span> <span class="keyword">struct</span>
+<span class="punctuation">{</span>
+    <span class="name">CHAR</span> <span class="name">logic</span><span class="punctuation">;</span>               <span class="name">event</span> <span class="name">request</span> <span class="name">condition</span>
+    <span class="name">WORD</span> <span class="name">evt_wt</span><span class="punctuation">;</span>              <span class="name">pending</span> <span class="name">event</span> <span class="name">map</span>
+    <span class="name">WORD</span> <span class="name">evt_sig</span><span class="punctuation">;</span>             <span class="name">posted</span> <span class="name">event</span> <span class="name">map</span>
+<span class="punctuation">}</span> <span class="name">EVT_D</span><span class="punctuation">;</span>
+<span class="keyword">typedef</span> <span class="keyword">struct</span>
+<span class="punctuation">{</span>
+    <span class="name">BYTE</span> <span class="operator">*</span><span class="name">msglnk</span><span class="punctuation">;</span>             <span class="name">message</span> <span class="name">link</span>
+    <span class="name">CHAR</span>  <span class="name">msgmrk</span><span class="punctuation">;</span>             <span class="name">message</span><span class="operator">-</span><span class="name">type</span> <span class="name">data</span> <span class="name">marker</span>
+    <span class="name">INT</span>   <span class="name">msgid</span><span class="punctuation">;</span>              <span class="name">message</span> <span class="name">identification</span>
+    <span class="name">INT</span>   <span class="name">msgsiz</span><span class="punctuation">;</span>             <span class="name">message</span> <span class="name">size</span>
+    <span class="name">CHAR</span> <span class="operator">*</span><span class="name">msg_p</span><span class="punctuation">;</span>              <span class="name">message</span> <span class="name">location</span>
+<span class="punctuation">}</span> <span class="name">MSG_D</span><span class="punctuation">;</span>
+</pre>
+</div>
+<div class="section" id="fault-analysis-area">
+<h2>Fault Analysis Area</h2>
+<p>This data area is used to log fault information reported by the LOG_FATAL and LOG_WARNING primitives.</p>
+<p>Its contents reflects the system state when the fault was reported.</p>
+<p>For the LOG_WARNING primitive, only fault_loc and fault_qual data are logged.</p>
+<p>Task-related data is not logged if no task was active when the fault reported.</p>
+<pre class="code c literal-block">
+<span class="keyword">typedef</span> <span class="keyword">struct</span>
+<span class="punctuation">{</span>
+    <span class="name">CHAR</span> <span class="name">r_A</span><span class="punctuation">;</span>                 <span class="name">processor</span> <span class="name label">registers</span><span class="punctuation">:</span> <span class="name">A</span>
+    <span class="name">CHAR</span> <span class="name">r_B</span><span class="punctuation">;</span>                                      <span class="name">B</span>
+    <span class="name">WORD</span> <span class="name">r_IX</span><span class="punctuation">;</span>                                     <span class="name">IX</span>
+    <span class="name">WORD</span> <span class="name">r_IY</span><span class="punctuation">;</span>                                     <span class="name">IY</span>
+    <span class="name">WORD</span> <span class="name">sp</span><span class="punctuation">;</span>                                       <span class="name">SP</span>
+    <span class="name">WORD</span> <span class="name">pc</span><span class="punctuation">;</span>                                       <span class="name">PC</span>
+    <span class="name">CHAR</span> <span class="name">cc</span><span class="punctuation">;</span>                                       <span class="name">CC</span>
+    <span class="name">CHAR</span> <span class="name">istate</span><span class="punctuation">;</span>              <span class="name">kernel</span> <span class="name">state</span>
+    <span class="name">CHAR</span> <span class="operator">*</span><span class="name">curtcb_p</span><span class="punctuation">;</span>           <span class="name">active</span> <span class="name">task</span>
+    <span class="name">CHAR</span>  <span class="name">curtcb</span><span class="punctuation">[</span><span class="literal number integer">32</span><span class="punctuation">];</span>         <span class="name">active</span> <span class="name">task</span> <span class="name">ctrl</span><span class="punctuation">.</span> <span class="name">block</span>
+    <span class="name">CHAR</span> <span class="name">ustk</span><span class="punctuation">[</span><span class="literal number integer">16</span><span class="punctuation">];</span>            <span class="name">task</span> <span class="name">stack</span>
+    <span class="name">CHAR</span> <span class="name">sstk</span><span class="punctuation">[</span><span class="literal number integer">16</span><span class="punctuation">];</span>            <span class="name">supervisor</span> <span class="name">stack</span>
+    <span class="name">WORD</span> <span class="name">fault_loc</span><span class="punctuation">;</span>           <span class="name">fault</span> <span class="name">location</span>
+    <span class="name">WORD</span> <span class="name">fault_qual</span><span class="punctuation">;</span>          <span class="name">fault</span> <span class="name">qualifier</span> <span class="name">data</span>
+<span class="punctuation">}</span> <span class="name">FAA</span><span class="punctuation">;</span>
+</pre>
+</div>
+</div>
+</div>
 
 </div><!-- /.toBeIndexed -->
 </div>
 <footer>
 <div class="rst-footer-nav" role="navigation" aria-label="footer navigation">
 
-
+<a href="ifSpecification.html" title="Accesskey Alt(+Shift)+p" accesskey="p">Previous</a><span class="bar">|</span><a href="perfMemory.html" title="Accesskey Alt(+Shift)+n" accesskey="n">Next</a>
 </div></footer>
 </div>
 </div>
@@ -226,3 +330,4 @@ SphinxRtdTheme.StickyNav.enable();
 </div>
 </header>
 </body>
+</html>

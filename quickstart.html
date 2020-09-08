@@ -179,16 +179,144 @@
 <div class="wy-nav-content">
 <div class="rst-content">
 <a href="index.html">Home</a>
-
+<a href="kernelIntegration.html" class="stealth-btn float-right" title="Accesskey Alt(+Shift)+n">Next</a><span class="bar  float-right">|</span>
 <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
 <div itemprop="articleBody" class="toBeIndexed">
+<div class="document">
+<div class="section" id="quickstart">
+<h1>Quickstart</h1>
+<p>Get started in three easy steps:</p>
+<ol class="arabic simple">
+<li>Download the agent kernel</li>
+<li>Install the agent</li>
+<li>Verify successful installation</li>
+</ol>
+<div class="section" id="requirements">
+<h2>Requirements</h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="74%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Item</th>
+<th class="head">Requirement</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>Package</td>
+<td>Debian (systemd-compatible) and binary</td>
+</tr>
+<tr><td>Operating system</td>
+<td>Linux</td>
+</tr>
+<tr><td>Architecture</td>
+<td>AMD 64-bit</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="prerequisites">
+<h2>Prerequisites</h2>
+<ul class="simple">
+<li>The kernel installation procedure requires you to authenticate with the cloud using your account credentials.</li>
+<li>The agent uses ports 7501 and 7502 to access the application API. Make sure these ports are available.</li>
+</ul>
+</div>
+<div class="section" id="step-1-download-the-agent-kernel">
+<h2>Step 1. Download the Agent Kernel</h2>
+<ol class="arabic">
+<li><p class="first">Download the latest kernel release package from the release web site.</p>
+</li>
+<li><p class="first">Extract the <cite>kernel_&lt;version&gt;.tar.gz</cite> file.</p>
+<blockquote>
+<pre class="code bash literal-block">
+$ tar xvzf kernel_&lt;version&gt;.tar.gz
+</pre>
+</blockquote>
+</li>
+<li><p class="first">Change directories to the extracted files:</p>
+<blockquote>
+<pre class="code bash literal-block">
+$ <span class="name builtin">cd</span> kernel_&lt;version&gt;
+</pre>
+<p>Continue with the <a class="reference internal" href="#debian-installation">Debian Installation</a> or <a class="reference internal" href="#standalone-binary-installation">Standalone Binary Installation</a> depending on your environment.</p>
+</blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="step-2-install-the-agent">
+<h2>Step 2. Install the Agent</h2>
+<p>This step prompts for your account credentials. For installation on multiple machines, see the <a class="reference internal" href="#notes-on-batch-installation">Notes on Batch Installation</a>.</p>
+<p>After successful installation, the agent listens for gRPC requests on port 7501 and HTTP requests on port 7502.</p>
+<div class="section" id="debian-installation">
+<h3>Debian Installation</h3>
+<pre class="code bash literal-block">
+$ sudo dpkg -i demoyard-agent_amd64.deb
+</pre>
+<p>The installer creates an <tt class="docutils literal">Agent</tt> user and /home/agent directory where it installs the default config.toml configuration file.</p>
+<p>The agent is installed in the /etc/agent directory so you can use systemd to manage the agent lifecycle.</p>
+</div>
+<div class="section" id="standalone-binary-installation">
+<h3>Standalone Binary Installation</h3>
+<pre class="code bash literal-block">
+$ ./demoyard-agent
+</pre>
+<p>The installer creates the <cite>$HOME/.agent</cite> directory where it installs the default <cite>config.toml</cite> configuration file.</p>
+<p>The agent binary is a standalone binary. You can daemonize it using a daemon service of your choice or manually manage its lifecycle.</p>
+</div>
+</div>
+<div class="section" id="step-3-verify-successful-installation">
+<h2>Step 3. Verify Successful Installation</h2>
+<p>The download includes a Python example that generates data streams and sends them to the cloud using the agent.</p>
+<p>Download and run the example to verify successful agent installation:</p>
+<ol class="arabic">
+<li><p class="first">Verify that the agent service is running.</p>
+</li>
+<li><p class="first">Clone the GitHub agent repository and locate the Python example in the <cite>/public/examples/python</cite> directory.</p>
+</li>
+<li><p class="first">Install the dependencies:</p>
+<blockquote>
+<pre class="code bash literal-block">
+$ pip install -r requirements.txt
+</pre>
+</blockquote>
+</li>
+<li><p class="first">Login to the web application using your cloud credentials and click the <strong>Live</strong> button, if needed, to be ready to view the telemetry and notifications sent by the Python example.</p>
+</li>
+<li><p class="first">Run the example:</p>
+<blockquote>
+<pre class="code bash literal-block">
+$ python main.py <span class="name variable">$PWD</span>
+</pre>
+</blockquote>
+</li>
+<li><p class="first">The example displays progress in the command window, indicating what is being sent to the agent.  Verify that this data is also displayed in the web application.  The last output sequence is a periodic data stream at 10-second intervals. Enter <tt class="docutils literal">Ctrl+c</tt> to terminate the continuous data stream and the example.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="notes-on-batch-installation">
+<h2>Notes on Batch Installation</h2>
+<p>For batch installation, set the following environment variables to match your cloud credentials. This automates cloud authentication.</p>
+<ul class="simple">
+<li><cite>AGENT_EMAIL</cite></li>
+<li><cite>AGENT_PASSWORD</cite></li>
+</ul>
+<p>Make sure to unset these variables after the installation successfully completes.</p>
+</div>
+<div class="section" id="next-steps">
+<h2>Next Steps</h2>
+<p>After installing an agent, read the Developer Guide and the Tutorials for a step-by-step guide to communicating with the agent from your application.</p>
+</div>
+</div>
+</div>
 
 </div><!-- /.toBeIndexed -->
 </div>
 <footer>
 <div class="rst-footer-nav" role="navigation" aria-label="footer navigation">
 
-
+<a href="kernelIntegration.html" title="Accesskey Alt(+Shift)+n" accesskey="n">Next</a>
 </div></footer>
 </div>
 </div>
@@ -226,3 +354,4 @@ SphinxRtdTheme.StickyNav.enable();
 </div>
 </header>
 </body>
+</html>

@@ -179,16 +179,106 @@
 <div class="wy-nav-content">
 <div class="rst-content">
 <a href="index.html">Home</a>
-
+<a href="tutCustom.html" class="stealth-btn float-right" title="Accesskey Alt(+Shift)+n">Next</a><span class="bar  float-right">|</span><a href="sysReliability.html" class="stealth-btn float-right" title="Accesskey Alt(+Shift)+p">Previous</a>
 <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
 <div itemprop="articleBody" class="toBeIndexed">
+<div class="document">
+<div class="section" id="your-first-application">
+<h1>Your First Application</h1>
+<p>This tutorial uses the Demoyard File System to show built-in support for using
+the file system as a data source. When you add a file to the directory,
+the Demoyard File System detects the change and sends a data point to the
+Demoyard Agent. You can view the change in the Demoyard Cloud user
+interface.</p>
+<p>The example introduces you to the configuration file, which describes
+the data source and associates a stream with the source.</p>
+<div class="section" id="step-1-set-up-your-demoyard-developer-environment">
+<h2>Step 1. Set up Your Demoyard Developer Environment</h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The setup step is a prerequisite for each of the tutorials that follow.</p>
+</div>
+<p>Install and run the Demoyard Agent as described in the <a class="reference external" href="quickstart.html">Quickstart</a> guide.</p>
+<p>For a Debian installation:</p>
+<pre class="code bash literal-block">
+$ sudo dpkg -i demoyard-agent_amd64.deb
+</pre>
+<p>For a standalone binary installation:</p>
+<pre class="code bash literal-block">
+$ ./demoyard-agent
+</pre>
+<p>Make sure you have a Demoyard account and can access the Demoyard Cloud.</p>
+</div>
+<div class="section" id="step-2-define-your-datastream">
+<h2>Step 2. Define Your Datastream</h2>
+<p>Define the Demoyard Agent communication parameters, data source, and data
+stream in the /home/demoyard/config.toml configuration file:</p>
+<pre class="code literal-block">
+[demoyard]
+agent-ip = &quot;localhost&quot;
+agent-port-grpc = &quot;7501&quot;
+agent-port-http = &quot;7502&quot;
+[[dataStreams]]
+name = &quot;demoyard_01&quot;
+dir = &quot;/home/ftp/upload&quot;
+demoyard-type = &quot;image&quot;
+ext = &quot;.png&quot;
+</pre>
+<p>The Demoyard Agent listens for gRPC API calls on port 7501. This is the preferred way for any data source to send data points to the Demoyard Agent, including the Demoyard File System.</p>
+<p>All data streams defined in the configuration file must, minimally, include a
+name attribute: <tt class="docutils literal">demoyard_01</tt>.</p>
+<p>The remaining attributes describe the data source:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="22%" />
+<col width="58%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Attribute</th>
+<th class="head">Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal">dir</tt></td>
+<td><tt class="docutils literal">home/ftp/upload</tt></td>
+<td>Directory monitored by the Demoyard File System</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">demoyard-type</span></tt></td>
+<td><tt class="docutils literal">image</tt></td>
+<td>Type of file monitored</td>
+</tr>
+<tr><td><tt class="docutils literal">ext</tt></td>
+<td><tt class="docutils literal">.png</tt></td>
+<td>Monitored file extension</td>
+</tr>
+</tbody>
+</table>
+<p>The Demoyard File System can also monitor tailed files but in this example, only .png image files are sent to the Demoyard Cloud.</p>
+</div>
+<div class="section" id="step-3-visualize-your-data">
+<h2>Step 3. Visualize Your Data</h2>
+<p>When you first create or modify the configuration file in /home/demoyard, you must restart the Demoyard Agent and the Demoyard File System for the configuration definition to take effect.</p>
+<p>To see your data, copy a .png image file to the /home/ftp/upload directory defined in the configuration file.</p>
+<p>Login to the Demoyard cloud application to see the image displayed in the <tt class="docutils literal">demoyard_01</tt> data stream.</p>
+</div>
+<div class="section" id="summary">
+<h2>Summary</h2>
+<p>This tutorial showed how to use the Demoyard File System to send changes in a
+directory to the Demoyard Cloud. You learned how the config.toml configuration file is used to associate data and data streams. You can experiment with the configuration file by changing the
+definition to a tail a file, and see the results in the Demoyard web application.</p>
+<p>The tutorials that follow build on the fundamental concepts shown here. Other tutorials show you how to develop applications that use Demoyard features for solving more advanced use cases.</p>
+</div>
+</div>
+</div>
 
 </div><!-- /.toBeIndexed -->
 </div>
 <footer>
 <div class="rst-footer-nav" role="navigation" aria-label="footer navigation">
 
-
+<a href="sysReliability.html" title="Accesskey Alt(+Shift)+p" accesskey="p">Previous</a><span class="bar">|</span><a href="tutCustom.html" title="Accesskey Alt(+Shift)+n" accesskey="n">Next</a>
 </div></footer>
 </div>
 </div>
@@ -226,3 +316,4 @@ SphinxRtdTheme.StickyNav.enable();
 </div>
 </header>
 </body>
+</html>

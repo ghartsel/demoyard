@@ -179,16 +179,118 @@
 <div class="wy-nav-content">
 <div class="rst-content">
 <a href="index.html">Home</a>
-
+<a href="conventions.html" class="stealth-btn float-right" title="Accesskey Alt(+Shift)+n">Next</a><span class="bar  float-right">|</span><a href="tutCustom.html" class="stealth-btn float-right" title="Accesskey Alt(+Shift)+p">Previous</a>
 <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
 <div itemprop="articleBody" class="toBeIndexed">
+<div class="document">
+<div class="section" id="make-an-api-call-to-the-demoyard-cloud">
+<h1>Make an API Call to the Demoyard Cloud</h1>
+<p>The Demoyard Cloud implements management and data storage functions for a network of distributed, autonomous agents. Agents access cloud functionality using the Demoyard Cloud API.</p>
+<p>This tutorial authenticates the agent with the cloud and gets the list of users associated with the agent. See the <a class="reference internal" href="#example">Example</a> code for the complete implementation.</p>
+<div class="section" id="authenticate-the-agent-with-the-cloud">
+<h2>Authenticate the Agent with the Cloud</h2>
+<p>Agents must first authenticate with the cloud before transferring data. Demoyard Cloud uses JSON Web Token (JWT) authentication.</p>
+<p>Pass your Demoyard account email address and password in the JWT request:</p>
+<pre class="code bash literal-block">
+curl -X POST -k -H <span class="literal string single">'Content-Type: application/json'</span> -i <span class="literal string single">'https://api-dev.demoyard/v1/admin/auth/login'</span> --data <span class="literal string single">'{&quot;email&quot;: &quot;joe.demoyard&#64;demoyard.com&quot;, &quot;password&quot;: &quot;changeMe123&quot;}'</span>
+</pre>
+<p>A JWT token is returned:</p>
+<pre class="code json literal-block">
+<span class="punctuation">{</span><span class="name tag">&quot;authentication&quot;</span><span class="punctuation">:</span>
+    <span class="punctuation">{</span><span class="name tag">&quot;accessToken&quot;</span><span class="punctuation">:</span><span class="literal string double">&quot;eyJraWQiOiJpcDJMUH ... v1NLf5Y70xtdtUyxRudUg&quot;</span><span class="punctuation">,</span>
+    <span class="name tag">&quot;refreshToken&quot;</span><span class="punctuation">:</span><span class="literal string double">&quot;eyJjdHkiOiJKV1Q ... 3pvYhCXvtntwMQFyPUNzA&quot;</span><span class="punctuation">,</span>
+    <span class="name tag">&quot;userId&quot;</span><span class="punctuation">:</span><span class="literal string double">&quot;5bc046f1-967a-4455-bae1-dc208f5e619a&quot;</span><span class="punctuation">}</span>
+<span class="punctuation">}</span>
+</pre>
+<p>Pass this token in the header of subsequent API calls. The token is valid for one hour.</p>
+</div>
+<div class="section" id="get-a-list-of-users-associated-with-the-agent">
+<h2>Get a List of Users Associated with the Agent</h2>
+<p>Use the <tt class="docutils literal">/admin/users</tt> URI to get information about the users associated with the agent:</p>
+<pre class="code bash literal-block">
+curl -X GET -k -H <span class="literal string single">'Content-Type: application/json'</span> -H <span class="literal string single">'Authorization: Bearer eyJraWQiOiJpcDJMUH ... v1NLf5Y70xtdtUyxRudUg'</span> -i <span class="literal string single">'https://api-dev.demoyard/v1/admin/users'</span>
+</pre>
+<p>Notice that the <tt class="docutils literal">Authorization</tt> field has a value of <tt class="docutils literal">Bearer</tt> and includes the previously returned JWT token.</p>
+<p>Demoyard Cloud returns a JSON structure of user information for all the users associated with the calling agent:</p>
+<pre class="code json literal-block">
+<span class="punctuation">{</span>
+  <span class="name tag">&quot;items&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span>
+    <span class="punctuation">{</span>
+      <span class="name tag">&quot;id&quot;</span><span class="punctuation">:</span> <span class="literal string double">&quot;174bb39d-bd58-450b-8614-f325c0525a7f&quot;</span><span class="punctuation">,</span>
+      <span class="name tag">&quot;created&quot;</span><span class="punctuation">:</span> <span class="literal string double">&quot;2018-09-12T22:02:15.748Z&quot;</span><span class="punctuation">,</span>
+      <span class="name tag">&quot;updated&quot;</span><span class="punctuation">:</span> <span class="literal string double">&quot;2018-11-16T23:22:54.937Z&quot;</span><span class="punctuation">,</span>
+      <span class="name tag">&quot;email&quot;</span><span class="punctuation">:</span> <span class="literal string double">&quot;admin&#64;example.com&quot;</span><span class="punctuation">,</span>
+      <span class="name tag">&quot;name&quot;</span><span class="punctuation">:</span> <span class="literal string double">&quot;admin&quot;</span><span class="punctuation">,</span>
+      <span class="name tag">&quot;role&quot;</span><span class="punctuation">:</span> <span class="literal string double">&quot;administrator&quot;</span><span class="punctuation">,</span>
+      <span class="name tag">&quot;enabled&quot;</span><span class="punctuation">:</span> <span class="keyword constant">true</span>
+    <span class="punctuation">},</span>
+    <span class="punctuation">{</span>
+      <span class="name tag">&quot;id&quot;</span><span class="punctuation">:</span> <span class="literal string double">&quot;5bc046f1-967a-4455-bae1-dc208f5e619a&quot;</span><span class="punctuation">,</span>
+      <span class="name tag">&quot;created&quot;</span><span class="punctuation">:</span> <span class="literal string double">&quot;2018-10-25T20:41:17.167Z&quot;</span><span class="punctuation">,</span>
+      <span class="name tag">&quot;updated&quot;</span><span class="punctuation">:</span> <span class="literal string double">&quot;2018-10-25T20:41:17.167Z&quot;</span><span class="punctuation">,</span>
+      <span class="name tag">&quot;email&quot;</span><span class="punctuation">:</span> <span class="literal string double">&quot;qa&#64;demoyard.com&quot;</span><span class="punctuation">,</span>
+      <span class="name tag">&quot;name&quot;</span><span class="punctuation">:</span> <span class="literal string double">&quot;QA&quot;</span><span class="punctuation">,</span>
+      <span class="name tag">&quot;role&quot;</span><span class="punctuation">:</span> <span class="literal string double">&quot;user&quot;</span><span class="punctuation">,</span>
+      <span class="name tag">&quot;enabled&quot;</span><span class="punctuation">:</span> <span class="keyword constant">true</span>
+    <span class="punctuation">},</span>
+                        <span class="error">.</span>
+                        <span class="error">.</span> <span class="error">(elided)</span>
+                        <span class="error">.</span>
+    <span class="punctuation">{</span>
+      <span class="name tag">&quot;id&quot;</span><span class="punctuation">:</span> <span class="literal string double">&quot;c26637d8-3d7b-47e3-b2bb-19ce7d250289&quot;</span><span class="punctuation">,</span>
+      <span class="name tag">&quot;created&quot;</span><span class="punctuation">:</span> <span class="literal string double">&quot;2018-11-16T21:08:47.793Z&quot;</span><span class="punctuation">,</span>
+      <span class="name tag">&quot;updated&quot;</span><span class="punctuation">:</span> <span class="literal string double">&quot;2018-11-16T21:08:47.793Z&quot;</span><span class="punctuation">,</span>
+      <span class="name tag">&quot;email&quot;</span><span class="punctuation">:</span> <span class="literal string double">&quot;mmaynard&#64;demoyard&quot;</span><span class="punctuation">,</span>
+      <span class="name tag">&quot;name&quot;</span><span class="punctuation">:</span> <span class="literal string double">&quot;Mark Maynard&quot;</span><span class="punctuation">,</span>
+      <span class="name tag">&quot;role&quot;</span><span class="punctuation">:</span> <span class="literal string double">&quot;user&quot;</span><span class="punctuation">,</span>
+      <span class="name tag">&quot;enabled&quot;</span><span class="punctuation">:</span> <span class="keyword constant">true</span>
+    <span class="punctuation">}</span>
+  <span class="punctuation">]</span>
+<span class="punctuation">}</span>
+</pre>
+</div>
+<div class="section" id="example">
+<h2>Example</h2>
+<pre class="code python literal-block">
+<span class="comment hashbang">#!/usr/bin/env python</span>
+<span class="keyword namespace">import</span> <span class="name namespace">requests</span>
+<span class="keyword namespace">import</span> <span class="name namespace">json</span>
+<span class="keyword namespace">import</span> <span class="name namespace">getpass</span>
+<span class="name">baseURI</span> <span class="operator">=</span> <span class="literal string single">'https://api-dev.demoyard/v1/admin/'</span>
+<span class="keyword">print</span> <span class="literal string single">'</span><span class="literal string escape">\n</span><span class="literal string single">Enter your Demoyard login credentials ...'</span>
+<span class="name">user_email</span> <span class="operator">=</span> <span class="name builtin">raw_input</span><span class="punctuation">(</span><span class="literal string single">'Email: '</span><span class="punctuation">)</span>
+<span class="keyword">try</span><span class="punctuation">:</span>
+    <span class="name">user_password</span> <span class="operator">=</span> <span class="name">getpass</span><span class="operator">.</span><span class="name">getpass</span><span class="punctuation">()</span>
+<span class="keyword">except</span> <span class="name exception">Exception</span> <span class="keyword">as</span> <span class="name">error</span><span class="punctuation">:</span>
+    <span class="keyword">print</span><span class="punctuation">(</span><span class="literal string single">'ERROR'</span><span class="punctuation">,</span> <span class="name">error</span><span class="punctuation">)</span>
+<span class="name">response</span> <span class="operator">=</span> <span class="name">requests</span><span class="operator">.</span><span class="name">post</span><span class="punctuation">(</span><span class="name">baseURI</span> <span class="operator">+</span> <span class="literal string single">'auth/login'</span><span class="punctuation">,</span> <span class="name">json</span><span class="operator">=</span><span class="punctuation">{</span><span class="literal string double">&quot;email&quot;</span><span class="punctuation">:</span> <span class="name">user_email</span><span class="punctuation">,</span> <span class="literal string double">&quot;password&quot;</span><span class="punctuation">:</span> <span class="name">user_password</span><span class="punctuation">},</span> <span class="name">headers</span><span class="operator">=</span><span class="punctuation">{</span><span class="literal string single">'content-type'</span><span class="punctuation">:</span><span class="literal string single">'application/json'</span><span class="punctuation">})</span>
+<span class="keyword">if</span> <span class="punctuation">(</span><span class="name">response</span><span class="operator">.</span><span class="name">status_code</span> <span class="operator">==</span> <span class="literal number integer">200</span><span class="punctuation">):</span>
+    <span class="name">jwt</span> <span class="operator">=</span> <span class="name">json</span><span class="operator">.</span><span class="name">loads</span> <span class="punctuation">(</span><span class="name">response</span><span class="operator">.</span><span class="name">text</span><span class="punctuation">)</span>
+    <span class="name">token</span> <span class="operator">=</span> <span class="name">jwt</span><span class="punctuation">[</span><span class="literal string single">'authentication'</span><span class="punctuation">][</span><span class="literal string single">'accessToken'</span><span class="punctuation">]</span>
+    <span class="name">token_header</span> <span class="operator">=</span> <span class="literal string single">'Bearer '</span> <span class="operator">+</span> <span class="name">token</span>
+    <span class="name">response</span> <span class="operator">=</span> <span class="name">requests</span><span class="operator">.</span><span class="name">get</span><span class="punctuation">(</span><span class="name">baseURI</span> <span class="operator">+</span> <span class="literal string single">'users'</span><span class="punctuation">,</span> <span class="name">headers</span><span class="operator">=</span><span class="punctuation">{</span><span class="literal string single">'content-type'</span><span class="punctuation">:</span><span class="literal string single">'application/json'</span><span class="punctuation">,</span> <span class="literal string single">'Authorization'</span><span class="punctuation">:</span> <span class="name">token_header</span><span class="punctuation">})</span>
+    <span class="name">users_list</span> <span class="operator">=</span> <span class="name">json</span><span class="operator">.</span><span class="name">loads</span> <span class="punctuation">(</span><span class="name">response</span><span class="operator">.</span><span class="name">text</span><span class="punctuation">)</span>
+    <span class="keyword">for</span> <span class="name">user</span> <span class="operator word">in</span> <span class="name">users_list</span><span class="punctuation">[</span><span class="literal string single">'items'</span><span class="punctuation">]:</span>
+        <span class="keyword">print</span> <span class="name">user</span><span class="punctuation">[</span><span class="literal string single">'id'</span><span class="punctuation">]</span>
+        <span class="keyword">if</span> <span class="name">user</span><span class="punctuation">[</span><span class="literal string single">'id'</span><span class="punctuation">]</span> <span class="operator">==</span> <span class="name">jwt</span><span class="punctuation">[</span><span class="literal string single">'authentication'</span><span class="punctuation">][</span><span class="literal string single">'userId'</span><span class="punctuation">]:</span>
+            <span class="keyword">print</span> <span class="literal string double">&quot;Your user information:&quot;</span>
+            <span class="name">response</span> <span class="operator">=</span> <span class="name">requests</span><span class="operator">.</span><span class="name">get</span><span class="punctuation">(</span><span class="name">baseURI</span> <span class="operator">+</span> <span class="literal string single">'users/'</span> <span class="operator">+</span> <span class="name">user</span><span class="punctuation">[</span><span class="literal string single">'id'</span><span class="punctuation">],</span> <span class="name">headers</span><span class="operator">=</span><span class="punctuation">{</span><span class="literal string single">'content-type'</span><span class="punctuation">:</span><span class="literal string single">'application/json'</span><span class="punctuation">,</span> <span class="literal string single">'Authorization'</span><span class="punctuation">:</span> <span class="name">token_header</span><span class="punctuation">})</span>
+            <span class="name">parsed</span> <span class="operator">=</span> <span class="name">json</span><span class="operator">.</span><span class="name">loads</span> <span class="punctuation">(</span><span class="name">response</span><span class="operator">.</span><span class="name">text</span><span class="punctuation">)</span>
+            <span class="keyword">print</span><span class="punctuation">(</span><span class="name">json</span><span class="operator">.</span><span class="name">dumps</span><span class="punctuation">(</span><span class="name">parsed</span><span class="punctuation">,</span> <span class="name">indent</span><span class="operator">=</span><span class="literal number integer">4</span><span class="punctuation">,</span> <span class="name">sort_keys</span><span class="operator">=</span><span class="name builtin pseudo">True</span><span class="punctuation">))</span>
+<span class="keyword">elif</span> <span class="punctuation">(</span><span class="name">response</span><span class="operator">.</span><span class="name">status_code</span> <span class="operator">==</span> <span class="literal number integer">401</span><span class="punctuation">):</span>
+    <span class="keyword">print</span> <span class="literal string double">&quot;Invalid login credentials provided&quot;</span>
+    <span class="keyword">print</span> <span class="name">parser</span><span class="operator">.</span><span class="name">print_help</span><span class="punctuation">()</span>
+</pre>
+</div>
+</div>
+</div>
 
 </div><!-- /.toBeIndexed -->
 </div>
 <footer>
 <div class="rst-footer-nav" role="navigation" aria-label="footer navigation">
 
-
+<a href="tutCustom.html" title="Accesskey Alt(+Shift)+p" accesskey="p">Previous</a><span class="bar">|</span><a href="conventions.html" title="Accesskey Alt(+Shift)+n" accesskey="n">Next</a>
 </div></footer>
 </div>
 </div>
@@ -226,3 +328,4 @@ SphinxRtdTheme.StickyNav.enable();
 </div>
 </header>
 </body>
+</html>
