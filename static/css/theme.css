@@ -4455,6 +4455,20 @@ abbr[title] {
 
 /* landing page ... */
 
+.abstract {
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 16px;
+    width: 100%;
+    max-width: 700px; /* Force to a maximum of 3 tiles wide */
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 40px;
+    margin-bottom: 50px;
+    padding-left: 20px;
+    text-align: left;
+}
+
 .landing {
     width: 100%;
     max-width: 700px; /* Force to a maximum of 3 tiles wide */
