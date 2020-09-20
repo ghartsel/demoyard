@@ -2599,7 +2599,7 @@ div[class^='highlight-'] {
     width: 100%;
     overflow-x: auto;
     background: #FFFFFF;
-    margin: 1px 0 24px 0;
+    margin: 0;
 }
 .codeblock, .rst-content .literal-block, .rst-content pre.literal-block, div[class^='highlight'] pre {
     background-color: #DDDEDC;
@@ -2620,14 +2620,12 @@ div[class^='highlight-'] {
 .code .keyword { color: #008000; font-weight: bold } /* Keyword */
 .code .operator { color: #666666 } /* Operator */
 .code .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
-.code .comment.hashbang { color: #408080; font-style: italic } /* Comment.Hashbang */
 .code .cm { color: #408080; font-style: italic } /* Comment.Multiline */
 .code .cp { color: #BC7A00 } /* Comment.Preproc */
 .code .comment.preproc { color: #BC7A00 } /* Comment.Preproc */
 .code .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
-.code .comment.preprocFile { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.code .comment.preprocfile { color: #408080; font-style: italic } /* Comment.PreprocFile */
 .code .c1 { color: #408080; font-style: italic } /* Comment.Single */
-.code .comment.single { color: #408080; font-style: italic } /* Comment.Single */
 .code .cs { color: #408080; font-style: italic } /* Comment.Special */
 .code .gd { color: #A00000 } /* Generic.Deleted */
 .code .ge { font-style: italic } /* Generic.Emph */
@@ -2642,13 +2640,12 @@ div[class^='highlight-'] {
 .code .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
 .code .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
 .code .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
-.code .keyword.namespace { color: #008000; font-weight: bold } /* Keyword.Namespace */
 .code .kp { color: #008000 } /* Keyword.Pseudo */
 .code .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
 .code .kt { color: #B00040 } /* Keyword.Type */
-.code .keyword.type { color: #B00040 } /* Keyword.Type */
 .code .m { color: #666666 } /* Literal.Number */
 .code .s { color: #BA2121 } /* Literal.String */
+.code .literal.string { color: #BA2121 } /* Literal.String */
 .code .na { color: #7D9029 } /* Name.Attribute */
 .code .name.builtin { color: #008000 } /* Name.Builtin */
 .code .nc { color: #0000FF; font-weight: bold } /* Name.Class */
@@ -2659,19 +2656,14 @@ div[class^='highlight-'] {
 .code .name.function { color: #0000FF } /* Name.Function */
 .code .nl { color: #A0A000 } /* Name.Label */
 .code .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
-.code .name.namespace { color: #0000FF; font-weight: bold } /* Name.Namespace */
 .code .name.tag { color: #008000; font-weight: bold } /* Name.Tag */
 .code .nv { color: #19177C } /* Name.Variable */
-.code .name.variable { color: #19177C } /* Name.Variable */
-.code .name { color: #19177C } /* Name.Variable */
 .code .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
-.code .operator.word { color: #AA22FF; font-weight: bold } /* Operator.Word */
 .code .w { color: #bbbbbb } /* Text.Whitespace */
 .code .mb { color: #666666 } /* Literal.Number.Bin */
 .code .mf { color: #666666 } /* Literal.Number.Float */
 .code .mh { color: #666666 } /* Literal.Number.Hex */
 .code .literal { color: #ff0000 } /* Literal.Number.Integer */
-.code .literal.number.integer { color: #ff0000 } /* Literal.Number.Integer */
 .code .mo { color: #666666 } /* Literal.Number.Oct */
 .code .sa { color: #BA2121 } /* Literal.String.Affix */
 .code .sb { color: #BA2121 } /* Literal.String.Backtick */
@@ -2680,16 +2672,13 @@ div[class^='highlight-'] {
 .code .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
 .code .literal.string.double { color: #BA2121 } /* Literal.String.Double */
 .code .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
-.code .literal.string.escape { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
 .code .sh { color: #BA2121 } /* Literal.String.Heredoc */
 .code .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
-.code .literal.string.interpol { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
 .code .sx { color: #008000 } /* Literal.String.Other */
 .code .sr { color: #BB6688 } /* Literal.String.Regex */
 .code .literal.string.single { color: #BA2121 } /* Literal.String.Single */
 .code .ss { color: #19177C } /* Literal.String.Symbol */
 .code .bp { color: #008000 } /* Name.Builtin.Pseudo */
-.code .name.builtin.pseudo { color: #008000 } /* Name.Builtin.Pseudo */
 .code .fm { color: #0000FF } /* Name.Function.Magic */
 .code .vc { color: #19177C } /* Name.Variable.Class */
 .code .vg { color: #19177C } /* Name.Variable.Global */
@@ -3129,7 +3118,7 @@ div[class^='highlight-'] {
 .wy-nav-content {
     padding: 1.618em 3.236em;
     height: 100%;
-    max-width: 1000px;
+    max-width: 10.5in;
     margin: auto;
 }
 .wy-nav-content {
@@ -3497,10 +3486,15 @@ footer p {
 }
 .rst-content .sidebar {
     float: right;
-    width: 40%;
+    width: 100%;
     display: block;
-    margin: 0 0 24px 24px;
-    padding: 12px;
+/*    margin: 0 0 24px 24px; */
+    margin-left: 24px;
+    margin-right: -4in;
+    margin-bottom: 6px;
+    margin-top: -24px;
+    padding-left: 12px;
+    padding-bottom: 6px;
     background: #f2ebe3;
     border: solid 1px #ded9d3;
 }
@@ -3514,9 +3508,9 @@ footer p {
     font-family: "Museo Sans", "Source Sans Pro", Helvetica, Arial, sans-serif;
     font-weight: bold;
     background: #ded9d3;
-    padding: 6px 12px;
-    margin: -12px;
-    margin-bottom: 24px;
+    padding: 6px;
+    margin-left: -12px;
+    margin-bottom: 6px;
     font-size: 100%}
 .rst-content .highlighted {
     background: #FFC;
@@ -4455,20 +4449,6 @@ abbr[title] {
 
 /* landing page ... */
 
-.abstract {
-    font-size: 12px;
-    font-weight: 300;
-    line-height: 16px;
-    width: 100%;
-    max-width: 700px; /* Force to a maximum of 3 tiles wide */
-    margin-right: auto;
-    margin-left: auto;
-    margin-top: 40px;
-    margin-bottom: 50px;
-    padding-left: 20px;
-    text-align: left;
-}
-
 .landing {
     width: 100%;
     max-width: 700px; /* Force to a maximum of 3 tiles wide */
@@ -4635,4 +4615,28 @@ display: none;
     flex-direction:column;
     -ms-flex-pack:distribute;
 /*    justify-content:space-around; */
+}
+
+div.leftside {
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 16px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    width: 4.75in;
+    float: left;
+}
+/*
+div.rightside {
+    margin-left: 5in;
+}
+*/
+.rst-content .rightside {
+    float: right;
+    width: 80%;
+    display: block;
+    margin-top: 12px;
+    margin-right: -4in;
+    background: #f2ebe3;
+    border: solid 1px #ded9d3;
 }
