@@ -124,6 +124,7 @@
 </li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#enter-cr-get-access-to-resource">ENTER_CR Get Access to Resource</a>
 </li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#exit-cr-release-access-to-resource">EXIT_CR Release Access to Resource</a>
 </li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#enter-scr-get-exclusive-access-to-processor">ENTER_SCR Get Exclusive Access to Processor</a>
+</li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#exit-scr-release-exclusive-access-to-processor">EXIT_SCR Release Exclusive Access to Processor</a>
 </li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#signal-signal-event-occurrence">SIGNAL Signal Event Occurrence</a>
 </li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#wait-wait-for-event-occurrence">WAIT Wait for Event Occurrence</a>
 </li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#send-send-message-to-task">SEND Send Message to Task</a>
@@ -132,10 +133,12 @@
 </li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#gettik-get-current-system-timer-value">GETTIK Get Current System Timer Value</a>
 </li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#q-getid-get-queue-identifier">Q_GETID Get Queue Identifier</a>
 </li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#q-clear-initialize-queue">Q_CLEAR Initialize Queue</a>
+</li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#q-get-get-item-from-linked-list-queue">Q_GET Get Item from Linked-list Queue</a>
 </li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#q-put-add-item-to-linked-list-queue">Q_PUT Add Item to Linked-list Queue</a>
 </li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#locate-mem-locate-task-dynamic-memory">LOCATE_MEM Locate Task Dynamic Memory</a>
 </li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#log-fatal-indicate-fatal-fault-occurrence">LOG_FATAL Indicate Fatal Fault Occurrence</a>
 </li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#log-warn-indicate-non-fatal-fault-occurrence">LOG_WARN Indicate Non-fatal Fault Occurrence</a>
+</li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#enter-sstate-enter-supervisory-state">ENTER_SSTATE Enter Supervisory State</a>
 </li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#exit-sstate-exit-supervisory-state">EXIT_SSTATE Exit Supervisory State</a>
 </li></ul></li><li class="toctree-l1"><a class="reference internal" href="dataStructures.html">Data Structures</a>
 <ul><li class="toctree-l2"><a class="reference internal" href="dataStructures.html#control-data">Control Data</a>
@@ -190,10 +193,22 @@
 <div class="section" id="gettid-get-task-identifier">
 <h2>GETTID Get Task Identifier</h2>
 <p>DESCRIPTION:</p>
-<blockquote>
+<div class="twocol docutils container">
+<div class="leftside docutils container">
 <p>This primitive is used to get a task's identifier, which is used with other primitives that reference a task.</p>
 <p>Given a logical task name, defined at compile time, this primitive returns the run-time identity of the task.</p>
-</blockquote>
+</div>
+<div class="rightside docutils container">
+<pre class="code cpp literal-block">
+<span class="comment preproc">#include</span> <span class="comment preprocfile">&lt;kernel.h&gt;</span><span class="comment preproc">
+#include</span> <span class="comment preprocfile">&lt;k_task.h&gt;</span><span class="comment preproc">
+</span>
+<span class="name">INT</span> <span class="name">status</span><span class="punctuation">;</span>
+<span class="name">BYTE</span> <span class="operator">*</span><span class="name">tid_p</span><span class="punctuation">;</span>
+<span class="name">status</span> <span class="operator">=</span> <span class="name">GETTID</span> <span class="punctuation">(</span><span class="literal string">&quot;T_MONITOR&quot;</span><span class="punctuation">,</span> <span class="operator">&amp;</span><span class="name">tid_p</span><span class="punctuation">);</span>
+</pre>
+</div>
+</div>
 <p>CONSIDERATIONS:</p>
 <blockquote>
 <p>The task name is a number between zero and the maximum allowed number of tasks, minus one.  The maximum number of tasks in the kernel is 64.  The task name is assigned in the configuration file.</p>
@@ -243,8 +258,20 @@ FAILURE Invalid task name, task does not exist or inconsistent data</blockquote>
 <div class="section" id="getmytid-get-own-task-identifier">
 <h2>GETMYTID Get Own Task Identifier</h2>
 <p>DESCRIPTION:</p>
-<blockquote>
-This returns the identity of the currently active task.  It operates the same as GETTID, except the task name is not needed.</blockquote>
+<div class="twocol docutils container">
+<div class="leftside docutils container">
+This returns the identity of the currently active task.  It operates the same as GETTID, except the task name is not needed.</div>
+<div class="rightside docutils container">
+<pre class="code cpp literal-block">
+<span class="comment preproc">#include</span> <span class="comment preprocfile">&lt;kernel.h&gt;</span><span class="comment preproc">
+#include</span> <span class="comment preprocfile">&lt;k_task.h&gt;</span><span class="comment preproc">
+</span>
+<span class="name">INT</span> <span class="name">status</span><span class="punctuation">;</span>
+<span class="name">BYTE</span> <span class="operator">*</span><span class="name">tid_p</span><span class="punctuation">;</span>
+<span class="name">status</span> <span class="operator">=</span> <span class="name">GETMYTID</span> <span class="punctuation">(</span><span class="operator">&amp;</span><span class="name">tid_p</span><span class="punctuation">);</span>
+</pre>
+</div>
+</div>
 <p>CONSIDERATIONS:</p>
 <blockquote>
 <p>The task that invokes this primitive is the currently active task.</p>
@@ -289,11 +316,22 @@ FAILURE Task data structure fault detected</blockquote>
 <div class="section" id="get-crid-get-resource-identifier">
 <h2>GET_CRID Get Resource Identifier</h2>
 <p>DESCRIPTION:</p>
-<blockquote>
+<div class="twocol docutils container">
+<div class="leftside docutils container">
 <p>This primitive gives a resource's identifier given the resource's name.</p>
-<p>The identifier is used for the ENTER_CR and EXIT_CR primitives, which
-allow mutually exclusive access to the resource.</p>
-</blockquote>
+<p>The identifier is used for the ENTER_CR and EXIT_CR primitives, which allow mutually exclusive access to the resource.</p>
+</div>
+<div class="rightside docutils container">
+<pre class="code cpp literal-block">
+<span class="comment preproc">#include</span> <span class="comment preprocfile">&lt;kernel.h&gt;</span><span class="comment preproc">
+#include</span> <span class="comment preprocfile">&lt;k_cr.h&gt;</span><span class="comment preproc">
+</span>
+<span class="name">INT</span> <span class="name">status</span><span class="punctuation">;</span>
+<span class="name">BYTE</span> <span class="operator">*</span><span class="name">crid_p</span><span class="punctuation">;</span>
+<span class="name">status</span> <span class="operator">=</span> <span class="name">GET_CRID</span> <span class="punctuation">(</span><span class="name">CR_CHAN</span><span class="punctuation">,</span> <span class="operator">&amp;</span><span class="name">crid_p</span><span class="punctuation">);</span>
+</pre>
+</div>
+</div>
 <p>CONSIDERATIONS:</p>
 <blockquote>
 <p>Resource names are assigned in the system configuration file.  The name
@@ -347,8 +385,21 @@ FAILURE Invalid resource name</blockquote>
 <div class="section" id="enter-cr-get-access-to-resource">
 <h2>ENTER_CR Get Access to Resource</h2>
 <p>DESCRIPTION:</p>
-<blockquote>
-This primitive provides for synchronization on a user-defined resource using a semaphore and guarantees mutually exclusive access to a resource.</blockquote>
+<div class="twocol docutils container">
+<div class="leftside docutils container">
+This primitive provides for synchronization on a user-defined resource using a semaphore and guarantees mutually exclusive access to a resource.</div>
+<div class="rightside docutils container">
+<pre class="code cpp literal-block">
+<span class="comment preproc">#include</span> <span class="comment preprocfile">&lt;kernel.h&gt;</span><span class="comment preproc">
+#include</span> <span class="comment preprocfile">&lt;k_cr.h&gt;</span><span class="comment preproc">
+</span>
+<span class="name">INT</span> <span class="name">status</span><span class="punctuation">;</span>
+<span class="name">BYTE</span> <span class="operator">*</span><span class="name">crid_p</span><span class="punctuation">;</span>
+<span class="name">status</span> <span class="operator">=</span> <span class="name">GET_CRID</span> <span class="punctuation">(</span><span class="name">CR_CHAN</span><span class="punctuation">,</span> <span class="operator">&amp;</span><span class="name">crid_p</span><span class="punctuation">);</span>
+<span class="name">status</span> <span class="operator">=</span> <span class="name">ENTER_CR</span> <span class="punctuation">(</span><span class="name">crid_p</span><span class="punctuation">);</span>
+</pre>
+</div>
+</div>
 <p>CONSIDERATIONS:</p>
 <blockquote>
 <p>The resource id must first be obtained using the CR_GETID primitive.</p>
@@ -399,9 +450,23 @@ FAILURE Invalid resource id or task has already acquired resource.</blockquote>
 <div class="section" id="exit-cr-release-access-to-resource">
 <h2>EXIT_CR Release Access to Resource</h2>
 <p>DESCRIPTION:</p>
-<blockquote>
-Release control of a resource that was obtained with the ENTER_CR
-primitive.</blockquote>
+<div class="twocol docutils container">
+<div class="leftside docutils container">
+Release control of a resource that was obtained with the ENTER_CR primitive.</div>
+<div class="rightside docutils container">
+<pre class="code cpp literal-block">
+<span class="comment preproc">#include</span> <span class="comment preprocfile">&lt;kernel.h&gt;</span><span class="comment preproc">
+#include</span> <span class="comment preprocfile">&lt;k_cr.h&gt;</span><span class="comment preproc">
+</span>
+<span class="name">INT</span> <span class="name">status</span><span class="punctuation">;</span>
+<span class="name">BYTE</span> <span class="operator">*</span><span class="name">crid_p</span><span class="punctuation">;</span>
+<span class="name">status</span> <span class="operator">=</span> <span class="name">GET_CRID</span> <span class="punctuation">(</span><span class="name">CR_CHAN</span><span class="punctuation">,</span> <span class="operator">&amp;</span><span class="name">crid_p</span><span class="punctuation">);</span>
+<span class="name">status</span> <span class="operator">=</span> <span class="name">ENTER_CR</span> <span class="punctuation">(</span><span class="name">crid_p</span><span class="punctuation">);</span>
+<span class="comment multiline">/* access critical region */</span>
+<span class="name">status</span> <span class="operator">=</span> <span class="name">EXIT_CR</span> <span class="punctuation">(</span><span class="name">crid_p</span><span class="punctuation">);</span>
+</pre>
+</div>
+</div>
 <p>CONSIDERATIONS:</p>
 <blockquote>
 <p>The resource identifier must first be obtained using the CR_GETID
@@ -451,15 +516,26 @@ FAILURE Invalid resource id, resource not acquired with previous ENTER_CR by thi
 <div class="section" id="enter-scr-get-exclusive-access-to-processor">
 <h2>ENTER_SCR Get Exclusive Access to Processor</h2>
 <p>DESCRIPTION:</p>
-<blockquote>
-Obtain mutually exclusive access to the processor.</blockquote>
+<div class="twocol docutils container">
+<div class="leftside docutils container">
+Obtain mutually exclusive access to the processor.</div>
+<div class="rightside docutils container">
+<pre class="code cpp literal-block">
+<span class="comment preproc">#include</span> <span class="comment preprocfile">&lt;kernel.h&gt;</span><span class="comment preproc">
+#include</span> <span class="comment preprocfile">&lt;k_cr.h&gt;</span><span class="comment preproc">
+</span>
+<span class="name">INT</span> <span class="name">status</span><span class="punctuation">;</span>
+<span class="name">status</span> <span class="operator">=</span> <span class="name">ENTER_SCR</span> <span class="punctuation">();</span>
+</pre>
+</div>
+</div>
 <p>CONSIDERATIONS:</p>
 <blockquote>
 <p>This primitive is implemented by disabling maskable interrupts, and is
 not associated with a particular resource.  Access is released by
 EXIT_SCR.</p>
 <p>This primitive is recommended for mutually exclusive access of short
-Duration because kernel time-related function is affected.</p>
+duration because kernel time-related function is affected.</p>
 <p>The processor condition code register is preserved upon return from the
 EXIT_SCR primitive.</p>
 <p>This is a non-suspending primitive.</p>
@@ -472,10 +548,25 @@ status = ENTER_SCR ();</blockquote>
 <p>ASSEMBLER ACCESS:</p>
 <blockquote>
 %ENTER_CR</blockquote>
-<p>EXIT_SCR Release Exclusive Access to Processor</p>
+</div>
+<div class="section" id="exit-scr-release-exclusive-access-to-processor">
+<h2>EXIT_SCR Release Exclusive Access to Processor</h2>
 <p>DESCRIPTION:</p>
-<blockquote>
-This primitive is the complement of ENTER_SCR and releases mutually exclusive control of the processor.</blockquote>
+<div class="twocol docutils container">
+<div class="leftside docutils container">
+This primitive is the complement of ENTER_SCR and releases mutually exclusive control of the processor.</div>
+<div class="rightside docutils container">
+<pre class="code cpp literal-block">
+<span class="comment preproc">#include</span> <span class="comment preprocfile">&lt;kernel.h&gt;</span><span class="comment preproc">
+#include</span> <span class="comment preprocfile">&lt;k_cr.h&gt;</span><span class="comment preproc">
+</span>
+<span class="name">INT</span> <span class="name">status</span><span class="punctuation">;</span>
+<span class="name">status</span> <span class="operator">=</span> <span class="name">ENTER_SCR</span> <span class="punctuation">();</span>
+<span class="comment multiline">/* access processor */</span>
+<span class="name">status</span> <span class="operator">=</span> <span class="name">EXIT_SCR</span> <span class="punctuation">();</span>
+</pre>
+</div>
+</div>
 <p>CONSIDERATIONS:</p>
 <blockquote>
 <p>The processor condition code register at the time ENTER_SCR was called
@@ -910,7 +1001,9 @@ FAILURE Invalid queue id</blockquote>
 <p>ASSEMBLER ACCESS:</p>
 <blockquote>
 %Q_CLEAR #qid</blockquote>
-<p>Q_GET Get Item from Linked-list Queue</p>
+</div>
+<div class="section" id="q-get-get-item-from-linked-list-queue">
+<h2>Q_GET Get Item from Linked-list Queue</h2>
 <p>DESCRIPTION:</p>
 <blockquote>
 Get the next item from a linked list queue.</blockquote>
@@ -1058,8 +1151,23 @@ FAILURE Memory not allocated for task</blockquote>
 <div class="section" id="log-fatal-indicate-fatal-fault-occurrence">
 <h2>LOG_FATAL Indicate Fatal Fault Occurrence</h2>
 <p>DESCRIPTION:</p>
-<blockquote>
-Log fatal-type fault and initiate recovery.</blockquote>
+<div class="twocol docutils container">
+<div class="leftside docutils container">
+Log fatal-type fault and initiate recovery.</div>
+<div class="rightside docutils container">
+<pre class="code cpp literal-block">
+<span class="comment preproc">#include</span> <span class="comment preprocfile">&lt;kernel.h&gt;</span><span class="comment preproc">
+#include</span> <span class="comment preprocfile">&lt;k_task.h&gt;</span><span class="comment preproc">
+#include</span> <span class="comment preprocfile">&lt;k_log.h&gt;</span><span class="comment preproc">
+</span>
+<span class="name">INT</span> <span class="name">status</span><span class="punctuation">;</span>
+<span class="name">BYTE</span> <span class="operator">*</span><span class="name">tid_p</span><span class="punctuation">;</span>
+<span class="keyword">if</span> <span class="punctuation">(</span><span class="name">status</span> <span class="operator">=</span> <span class="name">GETMYTID</span> <span class="punctuation">(</span><span class="operator">&amp;</span><span class="name">tid_p</span><span class="punctuation">))</span> <span class="operator">!=</span> <span class="name">SUCCESS</span> <span class="punctuation">{</span>
+    <span class="name">LOG_FATAL</span> <span class="punctuation">(</span><span class="name">LY_3</span> <span class="operator">+</span> <span class="name">SS_0</span> <span class="operator">+</span><span class="name">LV_L</span> <span class="operator">+</span> <span class="name">P2</span> <span class="operator">+</span> <span class="literal number integer">3</span><span class="punctuation">,</span> <span class="name">status</span><span class="punctuation">);</span>
+<span class="punctuation">}</span>
+</pre>
+</div>
+</div>
 <p>CONSIDERATIONS:</p>
 <blockquote>
 <p>If a task has been defined in the configuration file as a fault handler, the task is signaled with EVT_0, to indicate a fatal fault occurred, provided the fault did not occur in the fault handler task.</p>
@@ -1090,7 +1198,7 @@ status = LOG_FATAL (loc, qual);</blockquote>
 </tr>
 <tr><td>qual</td>
 <td>WORD</td>
-<td>ault qualifier</td>
+<td>Fault qualifier</td>
 </tr>
 </tbody>
 </table>
@@ -1102,8 +1210,23 @@ status = LOG_FATAL (loc, qual);</blockquote>
 <div class="section" id="log-warn-indicate-non-fatal-fault-occurrence">
 <h2>LOG_WARN Indicate Non-fatal Fault Occurrence</h2>
 <p>DESCRIPTION:</p>
-<blockquote>
-Report a warning-type fault.</blockquote>
+<div class="twocol docutils container">
+<div class="leftside docutils container">
+Report a warning-type fault.</div>
+<div class="rightside docutils container">
+<pre class="code cpp literal-block">
+<span class="comment preproc">#include</span> <span class="comment preprocfile">&lt;kernel.h&gt;</span><span class="comment preproc">
+#include</span> <span class="comment preprocfile">&lt;k_task.h&gt;</span><span class="comment preproc">
+#include</span> <span class="comment preprocfile">&lt;k_log.h&gt;</span><span class="comment preproc">
+</span>
+<span class="name">INT</span> <span class="name">status</span><span class="punctuation">;</span>
+<span class="name">BYTE</span> <span class="operator">*</span><span class="name">tid_p</span><span class="punctuation">;</span>
+<span class="keyword">if</span> <span class="punctuation">(</span><span class="name">status</span> <span class="operator">=</span> <span class="name">GETTID</span> <span class="punctuation">(</span><span class="literal string">&quot;T_MONITOR&quot;</span><span class="punctuation">,</span> <span class="operator">&amp;</span><span class="name">tid_p</span><span class="punctuation">))</span> <span class="operator">!=</span> <span class="name">SUCCESS</span> <span class="punctuation">{</span>
+    <span class="name">LOG_WARN</span> <span class="punctuation">(</span><span class="name">LY_3</span> <span class="operator">+</span> <span class="name">SS_0</span> <span class="operator">+</span><span class="name">LV_L</span> <span class="operator">+</span> <span class="name">P2</span> <span class="operator">+</span> <span class="literal number integer">3</span><span class="punctuation">,</span> <span class="name">status</span><span class="punctuation">);</span>
+<span class="punctuation">}</span>
+</pre>
+</div>
+</div>
 <p>CONSIDERATIONS:</p>
 <blockquote>
 <p>This primitive is used if detected faults are notable but may not compromise the system.</p>
@@ -1132,7 +1255,7 @@ status = LOG_WARN (loc, qual);</blockquote>
 </tr>
 <tr><td>qual</td>
 <td>WORD</td>
-<td>ault qualifier</td>
+<td>Fault qualifier</td>
 </tr>
 </tbody>
 </table>
@@ -1142,10 +1265,23 @@ INT SUCCESS Fault is logged</blockquote>
 <p>ASSEMBLER ACCESS:</p>
 <blockquote>
 %LOG_WARN #LOC, #QUAL</blockquote>
-<p>ENTER_SSTATE Enter Supervisory State</p>
+</div>
+<div class="section" id="enter-sstate-enter-supervisory-state">
+<h2>ENTER_SSTATE Enter Supervisory State</h2>
 <p>DESCRIPTION:</p>
-<blockquote>
-This primitive is the mechanism for an interrupt service routine invoke supervisory state processing.</blockquote>
+<div class="twocol docutils container">
+<div class="leftside docutils container">
+This primitive is the mechanism for an interrupt service routine invoke supervisory state processing.</div>
+<div class="rightside docutils container">
+<pre class="code cpp literal-block">
+<span class="comment preproc">#include</span> <span class="comment preprocfile">&lt;kernel.h&gt;</span><span class="comment preproc">
+#include</span> <span class="comment preprocfile">&lt;k_supv.h&gt;</span><span class="comment preproc">
+</span>
+<span class="name">INT</span> <span class="name">status</span><span class="punctuation">;</span>
+<span class="name">status</span> <span class="operator">=</span> <span class="name">ENTER_SSTATE</span> <span class="punctuation">();</span>
+</pre>
+</div>
+</div>
 <p>CONSIDERATIONS:</p>
 <blockquote>
 <p>This primitive allows the calling interrupt service routine and nested interrupt service routines to switch to the common system stack.</p>
@@ -1164,8 +1300,19 @@ ENTER_SSTATE ();</blockquote>
 <div class="section" id="exit-sstate-exit-supervisory-state">
 <h2>EXIT_SSTATE Exit Supervisory State</h2>
 <p>DESCRIPTION:</p>
-<blockquote>
-This primitive complements the ENTER_SSTATE primitive, and returns to the task state from the supervisory state.</blockquote>
+<div class="twocol docutils container">
+<div class="leftside docutils container">
+This primitive complements the ENTER_SSTATE primitive, and returns to the task state from the supervisory state.</div>
+<div class="rightside docutils container">
+<pre class="code cpp literal-block">
+<span class="comment preproc">#include</span> <span class="comment preprocfile">&lt;kernel.h&gt;</span><span class="comment preproc">
+#include</span> <span class="comment preprocfile">&lt;k_supv.h&gt;</span><span class="comment preproc">
+</span>
+<span class="name">INT</span> <span class="name">status</span><span class="punctuation">;</span>
+<span class="name">status</span> <span class="operator">=</span> <span class="name">EXIT_SSTATE</span> <span class="punctuation">();</span>
+</pre>
+</div>
+</div>
 <p>CONSIDERATIONS:</p>
 <blockquote>
 <p>For every ENTER_SSTATE call, there must be a matching EXIT_SSTATE call.</p>
@@ -1223,8 +1370,7 @@ SphinxRtdTheme.StickyNav.enable();
 <div class="header__container">
 <a href="index.html"><img class="raw_img" height="64" src="img/bannerLogo.png" alt="Documentation" /></a>
 
-<ul class="header__links"><li><a href="https://github.community/">Community</a></li><li><a href="https://github.com/ghartsel/DoreStaticSiteGenerator/tree/master/demo">GitHub</a></li></ul>
+<ul class="header__links"><li><a href="https://github.community/">Community</a></li><li><a href="https://github.com/ghartsel/DoreStaticSiteGenerator/tree/master/demo">GitHub</a></li><li><a href="https://www.gh.works/">About</a></li></ul>
 </div>
 </header>
 </body>
-</html>
