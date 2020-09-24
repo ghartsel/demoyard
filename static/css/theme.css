@@ -9,7 +9,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, nav, sectio
 audio, canvas, video {
     display: inline-block;
     *display: inline;
-    *zoom: 1;
+    *transform: scale(1.0);
 }
 audio:not([controls]) {
     display: none;
@@ -278,7 +278,7 @@ h2, .rst-content p.caption, h3 {
     -webkit-font-smoothing: antialiased;
 }
 .clearfix {
-    *zoom: 1;
+    transform: scale(1.0);
 }
 .clearfix:before, .clearfix:after {
     display: table;
@@ -1574,7 +1574,7 @@ button[disabled] {
     outline-none: false;
     vertical-align: middle;
     *display: inline;
-    zoom: 1;
+    transform: scale(1.0);
     -webkit-user-drag: none;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -1698,7 +1698,7 @@ button[disabled] {
 }
 .wy-btn-group {
     margin-bottom: 24px;
-    *zoom: 1;
+    transform: scale(1.0);
 }
 .wy-btn-group:before, .wy-btn-group:after {
     display: table;
@@ -1801,7 +1801,7 @@ button[disabled] {
 .wy-form-aligned input, .wy-form-aligned textarea, .wy-form-aligned select, .wy-form-aligned .wy-help-inline, .wy-form-aligned label {
     display: inline-block;
     *display: inline;
-    *zoom: 1;
+    *transform: scale(1.0);
     vertical-align: middle;
 }
 .wy-form-aligned .wy-control-group>label {
@@ -1848,11 +1848,11 @@ input, select, textarea {
 }
 .wy-control-group {
     margin-bottom: 24px;
-    *zoom: 1;
+    *transform: scale(1.0);
     max-width: 68em;
     margin-left: auto;
     margin-right: auto;
-    *zoom: 1;
+    *transform: scale(1.0);
 }
 .wy-control-group:before, .wy-control-group:after {
     display: table;
@@ -2063,7 +2063,7 @@ input[type="radio"][disabled], input[type="checkbox"][disabled] {
 .wy-form-message-inline {
     display: inline-block;
     *display: inline;
-    *zoom: 1;
+    *transform: scale(1.0);
     vertical-align: middle;
 }
 .wy-input-prefix, .wy-input-suffix {
@@ -2724,7 +2724,7 @@ div[class^='highlight-'] {
     text-decoration: none;
 }
 .wy-menu-horiz {
-    *zoom: 1;
+    *transform: scale(1.0);
 }
 .wy-menu-horiz:before, .wy-menu-horiz:after {
     display: table;
@@ -3084,7 +3084,7 @@ div[class^='highlight-'] {
     line-height: 50px;
     text-align: center;
     font-size: 100%;
-    *zoom: 1;
+    *transform: scale(1.0);
 }
 .wy-nav-top:before, .wy-nav-top:after {
     display: table;
@@ -3300,7 +3300,7 @@ footer p {
     text-align: right;
     font-size: 90%;
     cursor: pointer;
-    *zoom: 1;
+    *transform: scale(1.0);
 }
 .rst-versions .rst-current-version:before, .rst-versions .rst-current-version:after {
     display: table;
@@ -4623,7 +4623,7 @@ div.leftside {
     line-height: 16px;
     margin-top: 12px;
     margin-bottom: 12px;
-    width: 4.75in;
+    width: 3.75in;
     float: left;
 }
 /*
@@ -4633,10 +4633,34 @@ div.rightside {
 */
 .rst-content .rightside {
     float: right;
-    width: 80%;
+    width: 100%;
     display: block;
     margin-top: 12px;
     margin-right: -4in;
     background: #f2ebe3;
     border: solid 1px #ded9d3;
+}
+
+div.searchTopicTitle {
+    font-weight: 300;
+    font-size: 18px;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+    line-height: 1; 
+    color: #86bf41;
+    border-bottom: solid 1px #ded9d3;
+}
+
+div.searchSectionHeading {
+    font-size: 16px;
+    font-weight: 300;
+    color: #409fbf;
+    margin-left: : 12px;
+    margin-bottom: 12px;
+}
+
+div.searchSectionPara {
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 16px;
 }

@@ -19,7 +19,6 @@
 <link rel="shortcut icon" href="static/img/favicon.ico"/>
 <link rel="stylesheet" href="static/css/theme.css" type="text/css" />
 <link rel="stylesheet" href="static/css/jquery-ui.min.css" type="text/css" />
-<script src="static/js/modernizr.min.js"></script>
 </head>
 <body class="wy-body-for-nav">
 
@@ -29,10 +28,8 @@
 <div class="wy-side-nav-search">
 <ul class="sidebartop">
 <li class="nolink search"><div role="search">
-<form id="rtd-search-form" class="wy-form" action="searchResults.html" method="get">
+<form id="rtd-search-form" class="wy-form" action="search" method="get">
 <input type="text" name="q" placeholder="Search this document" aria-label="Search this project" id="searchinput" />
-<input type="hidden" name="check_keywords" value="yes" />
-<input type="hidden" name="area" value="default" />
 </form>
 </div>
 </li></ul>
@@ -124,6 +121,7 @@
 </li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#enter-cr-get-access-to-resource">ENTER_CR Get Access to Resource</a>
 </li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#exit-cr-release-access-to-resource">EXIT_CR Release Access to Resource</a>
 </li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#enter-scr-get-exclusive-access-to-processor">ENTER_SCR Get Exclusive Access to Processor</a>
+</li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#exit-scr-release-exclusive-access-to-processor">EXIT_SCR Release Exclusive Access to Processor</a>
 </li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#signal-signal-event-occurrence">SIGNAL Signal Event Occurrence</a>
 </li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#wait-wait-for-event-occurrence">WAIT Wait for Event Occurrence</a>
 </li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#send-send-message-to-task">SEND Send Message to Task</a>
@@ -132,10 +130,12 @@
 </li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#gettik-get-current-system-timer-value">GETTIK Get Current System Timer Value</a>
 </li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#q-getid-get-queue-identifier">Q_GETID Get Queue Identifier</a>
 </li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#q-clear-initialize-queue">Q_CLEAR Initialize Queue</a>
+</li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#q-get-get-item-from-linked-list-queue">Q_GET Get Item from Linked-list Queue</a>
 </li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#q-put-add-item-to-linked-list-queue">Q_PUT Add Item to Linked-list Queue</a>
 </li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#locate-mem-locate-task-dynamic-memory">LOCATE_MEM Locate Task Dynamic Memory</a>
 </li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#log-fatal-indicate-fatal-fault-occurrence">LOG_FATAL Indicate Fatal Fault Occurrence</a>
 </li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#log-warn-indicate-non-fatal-fault-occurrence">LOG_WARN Indicate Non-fatal Fault Occurrence</a>
+</li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#enter-sstate-enter-supervisory-state">ENTER_SSTATE Enter Supervisory State</a>
 </li><li class="toctree-l2"><a class="reference internal" href="ifSpecification.html#exit-sstate-exit-supervisory-state">EXIT_SSTATE Exit Supervisory State</a>
 </li></ul></li><li class="toctree-l1"><a class="reference internal" href="dataStructures.html">Data Structures</a>
 <ul><li class="toctree-l2"><a class="reference internal" href="dataStructures.html#control-data">Control Data</a>
